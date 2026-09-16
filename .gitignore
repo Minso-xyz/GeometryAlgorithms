@@ -1,0 +1,24 @@
+# Visual Studio
+.vs/
+ipch/
+*.suo
+*.user
+*.VC.db
+*.VC.opendb
+ 
+# Build
+x64/
+x86/
+Debug/
+Release/
+ 
+# NuGet
+packages/
+ 
+# Binary
+*.obj
+*.exe
+*.dll
+*.pdb
+*.ilk
+*.lib
