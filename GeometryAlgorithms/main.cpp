@@ -2,6 +2,11 @@
 #include "Imgui.h"
 #include "Mesh.h"
 #include "Renderer.h"
+#include "Camera.h"
+
+Camera* gCamera = nullptr;
+
+void ScrollCallback(GLFWwindow* window, double xOffset, double yOffset);
 
 int main()
 {
@@ -17,28 +22,54 @@ int main()
 	}
 
 	glfwMakeContextCurrent(window);
+	glEnable(GL_DEPTH_TEST);
+	glfwSetScrollCallback(window, ScrollCallback);
 
 	Mesh mesh;
 	mesh.triangles.push_back(
 		Triangle(
-			Point3D(-1, -1, 0),
-			Point3D(1, -1, 0),
-			Point3D(0, 1, 0)
+			Point3D(-100, -100, 0),
+			Point3D(100, -100, 0),
+			Point3D(0, 100, 0)
 		));
 
 	Renderer renderer;
+	Camera camera;
+	gCamera = &camera;
+
+	camera.SetIsometricView();
 
 	while (!glfwWindowShouldClose(window))
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
+		int width;
+		int height;
+
+		glfwGetFramebufferSize(window, &width, &height);
+		glViewport(0, 0, width, height);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		camera.ApplyProjection(width, height);
+		camera.ApplyView();
+		renderer.DrawCoordinateAxis();
+
+		camera.HandleMouse(window);
 
 		renderer.DrawMesh(mesh);
 
 		glfwSwapBuffers(window);
-		glfwPollEvents();
+		glfwPollEvents();   // handle the mouse/keyboard inputs
+		camera.HandleInput(window);
 	}
 
 	glfwTerminate();
 
 	return 0;
+}
+
+void ScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
+{
+	if (gCamera)
+	{
+		gCamera->HandleScroll(yOffset);  // only yOffset is used (Up-down mouse wheel)
+	}
 }
