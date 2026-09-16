@@ -1,5 +1,7 @@
 #include <GLFW/glfw3.h>
 #include "Imgui.h"
+#include "Mesh.h"
+#include "Renderer.h"
 
 int main()
 {
@@ -16,9 +18,21 @@ int main()
 
 	glfwMakeContextCurrent(window);
 
+	Mesh mesh;
+	mesh.triangles.push_back(
+		Triangle(
+			Point3D(-1, -1, 0),
+			Point3D(1, -1, 0),
+			Point3D(0, 1, 0)
+		));
+
+	Renderer renderer;
+
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		renderer.DrawMesh(mesh);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
