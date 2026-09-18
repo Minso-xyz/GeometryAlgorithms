@@ -3,6 +3,7 @@
 #include "Mesh.h"
 #include "Renderer.h"
 #include "Camera.h"
+#include "OBJLoader.h"
 
 Camera* gCamera = nullptr;
 
@@ -38,6 +39,9 @@ int main()
 	gCamera = &camera;
 
 	camera.SetIsometricView();
+
+	OBJLoader objLoader;
+	Mesh objMesh = objLoader.Load("..\\stanford-bunny.obj");
 
 	while (!glfwWindowShouldClose(window))
 	{
