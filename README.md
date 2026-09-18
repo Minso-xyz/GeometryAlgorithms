@@ -4,10 +4,10 @@ Interactive geometry and mesh processing playground
 written in C++ and OpenGL.
  
 ## Current Features
-- OpenGL Viewer
-- Orbit Camera
-- Mesh Rendering
 - OBJ Loader
+- Triangle Mesh Rendering
+- Orbit Camera
+- Bounding Box Fitting
 - Stanford Bunny Rendering
  
 ## OBJ Mesh Rendering
@@ -17,10 +17,13 @@ The Standford Bunny (Vertices: 35947, Faces: 69451)
 | ![GeometryAlgorithms](Bunny.png)  | ![GeometryAlgorithms](Bunny_Wireframe.png) |
  
 ## Roadmap
-- Face Normal Visualization
-- Vertex Normal Visualization
-- Half Edge Data Structure
-- Laplacian Smoothing
-- Curvature Visualization
-- Mesh Simplification
-- Subdivision
+- [x] OBJ Loader
+- [x] Wireframe Mesh Rendering
+- [ ] Face Normal Visualization
+- [ ] Vertex Normal Visualization
+- [ ] Half-Edge Data Structure
+- [ ] Laplacian Smoothing
+- [ ] Mesh Simplification
+- [ ] Subdivision
+- [ ] Curvature Visualization
+- [ ] Gaussian Splatting Experiments
