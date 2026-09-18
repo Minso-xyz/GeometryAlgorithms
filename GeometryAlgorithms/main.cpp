@@ -26,8 +26,8 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	glfwSetScrollCallback(window, ScrollCallback);
 
-	Mesh mesh;
-	mesh.triangles.push_back(
+	Mesh meshTriangle;
+	meshTriangle.Triangles.push_back(
 		Triangle(
 			Point3D(-100, -100, 0),
 			Point3D(100, -100, 0),
@@ -40,8 +40,13 @@ int main()
 
 	camera.SetIsometricView();
 
+	// Load the Stanford Bunny obj file
 	OBJLoader objLoader;
 	Mesh objMesh = objLoader.Load("..\\stanford-bunny.obj");
+
+	// Fit the view as the size of the bunny
+	BoundingBox boxBunny = objMesh.GetBoundingBox();
+	camera.FitTargetBox(boxBunny);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -58,7 +63,8 @@ int main()
 
 		camera.HandleMouse(window);
 
-		renderer.DrawMesh(mesh);
+		//renderer.DrawMesh(meshTriangle);
+		renderer.DrawMesh(objMesh);   // Render the Stanford Bunny
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();   // handle the mouse/keyboard inputs

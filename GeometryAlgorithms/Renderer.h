@@ -23,4 +23,5 @@ public:
 	void DrawCube();
 	void DrawMesh(const Mesh& mesh);
 	void DrawTriangle(const Triangle& triangle);
+	void DrawBoundingBox(const BoundingBox& boundingBox);
 };

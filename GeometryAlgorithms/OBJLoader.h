@@ -51,6 +51,17 @@ public:
 				mesh.Faces.push_back(face);
 			}
 		}
+
+		// Create the triangles from the extracted vertices and faces
+		for (const Face& face : mesh.Faces)
+		{
+			Point3D a = mesh.Vertices[face.V0].Position;
+			Point3D b = mesh.Vertices[face.V1].Position;
+			Point3D c = mesh.Vertices[face.V2].Position;
+			Triangle triangle(a, b, c);
+
+			mesh.Triangles.push_back(triangle);
+		}
 		return mesh;
 	}
 };

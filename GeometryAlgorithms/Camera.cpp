@@ -201,8 +201,8 @@ void Camera::HandleMouse(GLFWwindow* window)
 
 void Camera::HandleScroll(double offset)
 {
-	Zoom -= static_cast<float>(offset) * 3.0f;
+	Zoom -= static_cast<float>(offset) * 0.005f;
 
-	if (Zoom < 1.0f) Zoom = 1.0f;
+	if (Zoom < 0.05f) Zoom = 0.05f;
 	if (Zoom > 1000.0f) Zoom = 1000.0f;
 }

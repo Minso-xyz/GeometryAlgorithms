@@ -7,7 +7,7 @@
 
 void Renderer::DrawMesh(const Mesh& mesh)
 {
-	for (const auto& triangle : mesh.triangles)
+	for (const auto& triangle : mesh.Triangles)
 	{
 		DrawTriangle(triangle);
 	}
@@ -19,6 +19,7 @@ void Renderer::DrawTriangle(const Triangle& triangle)
 	DrawLine(Line3D(triangle.B, triangle.C));
 	DrawLine(Line3D(triangle.C, triangle.A));
 }
+
 
 void Renderer::DrawPoint(const Point3D& point)
 {
@@ -133,19 +134,19 @@ void Renderer::DrawCoordinateAxis()
 	glBegin(GL_LINES);
 
 	// X-Axis (Red)
-	glColor3f(150.0f, 0.0f, 0.0f);
-	glVertex3f(-150.0f, 0.0f, 0.0f);
-	glVertex3f(150.0f, 0.0f, 0.0f);
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(-1.0f, 0.0f, 0.0f);
+	glVertex3f(1.0f, 0.0f, 0.0f);
 
 	// Y-Axis (Green)
-	glColor3f(0.0f, 200.0f, 0.0f);
-	glVertex3f(0.0f, -200.0f, 0.0f);
-	glVertex3f(0.0f, 200.0f, 0.0f);
+	glColor3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(0.0f, -1.0f, 0.0f);
+	glVertex3f(0.0f, 1.0f, 0.0f);
 
 	// Z-Axis (Blue)
-	glColor3f(0.0f, 0.0f, 150.0f);
-	glVertex3f(0.0f, 0.0f, -150.0f);
-	glVertex3f(0.0f, 0.0f, 150.0f);
+	glColor3f(0.0f, 0.0f, 1.0f);
+	glVertex3f(0.0f, 0.0f, -1.0f);
+	glVertex3f(0.0f, 0.0f, 1.0f);
 
 	glEnd();
 }
