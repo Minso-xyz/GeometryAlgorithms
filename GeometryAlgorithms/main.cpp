@@ -66,6 +66,12 @@ int main()
 		//renderer.DrawMesh(meshTriangle);
 		renderer.DrawMesh(objMesh);   // Render the Stanford Bunny
 
+		// Render the normal vector on each mesh
+		for (auto triangle : objMesh.Triangles)
+		{
+			renderer.DrawNormal(triangle);
+		}
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();   // handle the mouse/keyboard inputs
 		camera.HandleInput(window);

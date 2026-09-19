@@ -20,6 +20,14 @@ void Renderer::DrawTriangle(const Triangle& triangle)
 	DrawLine(Line3D(triangle.C, triangle.A));
 }
 
+void Renderer::DrawNormal(Triangle triangle)
+{
+	Vector3D normal = triangle.Normal();
+	Point3D start = triangle.GetCenter();
+	Point3D end = start + normal * 0.005;
+	DrawLine2(Line3D(start, end));
+}
+
 
 void Renderer::DrawPoint(const Point3D& point)
 {
@@ -32,9 +40,19 @@ void Renderer::DrawPoint(const Point3D& point)
 
 void Renderer::DrawLine(const Line3D& line)
 {
-	glLineWidth(2.0f);
+	glLineWidth(0.5f);
 	glBegin(GL_LINES);
 	glColor3f(1.0f, 1.0f, 1.0f);
+	glVertex3f((float)line.Start.X, (float)line.Start.Y, (float)line.Start.Z);
+	glVertex3f((float)line.End.X, (float)line.End.Y, (float)line.End.Z);
+	glEnd();
+}
+
+void Renderer::DrawLine2(const Line3D& line)
+{
+	glLineWidth(0.2f);
+	glBegin(GL_LINES);
+	glColor3f(1.0f, 0.0f, 1.0f);
 	glVertex3f((float)line.Start.X, (float)line.Start.Y, (float)line.Start.Z);
 	glVertex3f((float)line.End.X, (float)line.End.Y, (float)line.End.Z);
 	glEnd();

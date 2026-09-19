@@ -15,6 +15,7 @@ public:
 	void DrawCoordinateAxis();
 	void DrawPoint(const Point3D& point);
 	void DrawLine(const Line3D& line);
+	void DrawLine2(const Line3D& line);
 	void DrawCircle(const Circle3D& circle);
 	void DrawPolyline(const std::vector<Point3D>& points);
 	void DrawBSplineCurve(const BSplineCurve& curve);
@@ -24,4 +25,5 @@ public:
 	void DrawMesh(const Mesh& mesh);
 	void DrawTriangle(const Triangle& triangle);
 	void DrawBoundingBox(const BoundingBox& boundingBox);
+	void DrawNormal(Triangle triangle);
 };
