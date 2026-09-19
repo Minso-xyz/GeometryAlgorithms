@@ -141,6 +141,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="HEFace.h" />
+    <ClInclude Include="HEHalfEdge.h" />
+    <ClInclude Include="HEVertex.h" />
     <ClInclude Include="OBJLoader.h" />
     <ClInclude Include="Renderer.h" />
   </ItemGroup>

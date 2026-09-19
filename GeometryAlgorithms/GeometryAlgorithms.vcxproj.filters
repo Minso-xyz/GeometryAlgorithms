@@ -35,5 +35,14 @@
     <ClInclude Include="OBJLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HEVertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HEFace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HEHalfEdge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
