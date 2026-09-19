@@ -28,6 +28,13 @@ void Renderer::DrawNormal(Triangle triangle)
 	DrawLine2(Line3D(start, end));
 }
 
+void Renderer::DrawVertexNormal(const Vertex& vertex)
+{
+	Point3D start = vertex.Position;
+	Point3D end = vertex.Position + (vertex.Normal * 0.005);
+	DrawLine2(Line3D(start, end));
+}
+
 
 void Renderer::DrawPoint(const Point3D& point)
 {

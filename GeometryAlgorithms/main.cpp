@@ -66,10 +66,17 @@ int main()
 		//renderer.DrawMesh(meshTriangle);
 		renderer.DrawMesh(objMesh);   // Render the Stanford Bunny
 
-		// Render the normal vector on each mesh
+		// Render the normal vector on each face
 		for (auto triangle : objMesh.Triangles)
 		{
 			renderer.DrawNormal(triangle);
+		}
+
+		// Render the vertex normal vector on each vertex
+		objMesh.CalculateVertexNormals();
+		for (auto vertex : objMesh.Vertices)
+		{
+			renderer.DrawVertexNormal(vertex);
 		}
 
 		glfwSwapBuffers(window);

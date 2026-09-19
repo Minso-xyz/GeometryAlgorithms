@@ -26,4 +26,5 @@ public:
 	void DrawTriangle(const Triangle& triangle);
 	void DrawBoundingBox(const BoundingBox& boundingBox);
 	void DrawNormal(Triangle triangle);
+	void DrawVertexNormal(const Vertex& vertex);
 };
