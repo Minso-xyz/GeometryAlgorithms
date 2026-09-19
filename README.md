@@ -9,6 +9,7 @@ written in C++ and OpenGL.
 - Orbit Camera
 - Bounding Box Fitting
 - Stanford Bunny Rendering
+- Face Normal Visualization
  
 ## OBJ Mesh Rendering
 The Standford Bunny (Vertices: 35947, Faces: 69451)
@@ -19,7 +20,7 @@ The Standford Bunny (Vertices: 35947, Faces: 69451)
 ## Roadmap
 - [x] OBJ Loader
 - [x] Wireframe Mesh Rendering
-- [ ] Face Normal Visualization
+- [x] Face Normal Visualization
 - [ ] Vertex Normal Visualization
 - [ ] Half-Edge Data Structure
 - [ ] Laplacian Smoothing
