@@ -13,36 +13,51 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Rendering">
+      <UniqueIdentifier>{f91d7b00-ad5c-46d5-896f-5f9264c3e92e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MeshProcessing">
+      <UniqueIdentifier>{266251e0-5191-49c7-97db-0537124e6a53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ComputationalGeometry">
+      <UniqueIdentifier>{16e6b7f1-7b47-46ec-8495-11a077037816}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="OBJLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HEVertex.h">
-      <Filter>Header Files</Filter>
+      <Filter>MeshProcessing</Filter>
     </ClInclude>
     <ClInclude Include="HEFace.h">
-      <Filter>Header Files</Filter>
+      <Filter>MeshProcessing</Filter>
     </ClInclude>
     <ClInclude Include="HEHalfEdge.h">
-      <Filter>Header Files</Filter>
+      <Filter>MeshProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="HEVertex.h">
+      <Filter>MeshProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Point2D.h">
+      <Filter>ComputationalGeometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Polygon.h">
+      <Filter>ComputationalGeometry</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

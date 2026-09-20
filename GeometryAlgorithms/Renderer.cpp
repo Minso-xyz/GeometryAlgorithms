@@ -4,6 +4,8 @@
 #include "BSplineCurve.h"
 #include "Mesh.h"
 #include "Triangle.h"
+#include "Polygon.h"
+#include "Point2D.h"
 
 void Renderer::DrawMesh(const Mesh& mesh)
 {
@@ -35,7 +37,6 @@ void Renderer::DrawVertexNormal(const Vertex& vertex)
 	DrawLine2(Line3D(start, end));
 }
 
-
 void Renderer::DrawPoint(const Point3D& point)
 {
 	glPointSize(10.0f);
@@ -62,6 +63,16 @@ void Renderer::DrawLine2(const Line3D& line)
 	glColor3f(1.0f, 0.0f, 1.0f);
 	glVertex3f((float)line.Start.X, (float)line.Start.Y, (float)line.Start.Z);
 	glVertex3f((float)line.End.X, (float)line.End.Y, (float)line.End.Z);
+	glEnd();
+}
+
+void Renderer::DrawLine2D(const Point2D& pt1, const Point2D& pt2)
+{
+	glLineWidth(0.2f);
+	glBegin(GL_LINES);
+	glColor3f(1.0f, 0.0f, 1.0f);
+	glVertex2f((float)pt1.X, (float)pt1.Y);
+	glVertex2f((float)pt2.X, (float)pt2.Y);
 	glEnd();
 }
 
@@ -95,6 +106,15 @@ void Renderer::DrawPolyline(const std::vector<Point3D>& points)
 		);
 	}
 	glEnd();
+}
+
+void Renderer::DrawPolygon(const Polygon& polygon)
+{
+	for (int i = 0; i < polygon.Vertices.size()-1; i++)
+	{
+		DrawLine2D(polygon.Vertices[i], polygon.Vertices[i + 1]);
+	}
+	DrawLine2D(polygon.Vertices[polygon.Vertices.size() - 1], polygon.Vertices[0]);
 }
 
 void Renderer::DrawBSplineCurve(const BSplineCurve& curve)

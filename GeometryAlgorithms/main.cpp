@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "Camera.h"
 #include "OBJLoader.h"
+#include "Polygon.h"
 
 Camera* gCamera = nullptr;
 
@@ -34,19 +35,22 @@ int main()
 			Point3D(0, 100, 0)
 		));
 
+	Polygon square;
+	square.Vertices =
+	{
+	{0,0},
+	{10,0},
+	{10,10},
+	{0,10}
+	};
+
 	Renderer renderer;
 	Camera camera;
 	gCamera = &camera;
 
 	camera.SetIsometricView();
 
-	// Load the Stanford Bunny obj file
-	OBJLoader objLoader;
-	Mesh objMesh = objLoader.Load("..\\stanford-bunny.obj");
-
-	// Fit the view as the size of the bunny
-	BoundingBox boxBunny = objMesh.GetBoundingBox();
-	camera.FitTargetBox(boxBunny);
+	//LoadBunny(camera);  // Load the Bunny OBJ file and set the view
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -63,21 +67,9 @@ int main()
 
 		camera.HandleMouse(window);
 
-		//renderer.DrawMesh(meshTriangle);
-		renderer.DrawMesh(objMesh);   // Render the Stanford Bunny
+		//RenderBunny(renderer, objMesh);   // Render the bunny meshes
 
-		// Render the normal vector on each face
-		for (auto triangle : objMesh.Triangles)
-		{
-			renderer.DrawNormal(triangle);
-		}
-
-		// Render the vertex normal vector on each vertex
-		objMesh.CalculateVertexNormals();
-		for (auto vertex : objMesh.Vertices)
-		{
-			renderer.DrawVertexNormal(vertex);
-		}
+		renderer.DrawPolygon(square);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();   // handle the mouse/keyboard inputs
@@ -94,5 +86,35 @@ void ScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
 	if (gCamera)
 	{
 		gCamera->HandleScroll(yOffset);  // only yOffset is used (Up-down mouse wheel)
+	}
+}
+
+void LoadBunny(Camera camera)
+{
+	// Load the Stanford Bunny obj file
+	OBJLoader objLoader;
+	Mesh objMesh = objLoader.Load("..\\stanford-bunny.obj");
+
+	// Fit the view as the size of the bunny
+	BoundingBox boxBunny = objMesh.GetBoundingBox();
+	camera.FitTargetBox(boxBunny);
+}
+
+void RenderBunny(Renderer renderer, Mesh objMesh)
+{
+	//renderer.DrawMesh(meshTriangle);
+	renderer.DrawMesh(objMesh);   // Render the Stanford Bunny
+
+	// Render the normal vector on each face
+	for (auto triangle : objMesh.Triangles)
+	{
+		renderer.DrawNormal(triangle);
+	}
+
+	// Render the vertex normal vector on each vertex
+	objMesh.CalculateVertexNormals();
+	for (auto vertex : objMesh.Vertices)
+	{
+		renderer.DrawVertexNormal(vertex);
 	}
 }

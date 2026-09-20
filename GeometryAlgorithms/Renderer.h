@@ -7,6 +7,8 @@
 #include "BSplineCurve.h"
 #include "Mesh.h"
 #include "Triangle.h"
+#include "Point2D.h"
+#include "Polygon.h"
 
 class Renderer
 {
@@ -16,8 +18,10 @@ public:
 	void DrawPoint(const Point3D& point);
 	void DrawLine(const Line3D& line);
 	void DrawLine2(const Line3D& line);
+	void DrawLine2D(const Point2D& pt1, const Point2D& pt2);
 	void DrawCircle(const Circle3D& circle);
 	void DrawPolyline(const std::vector<Point3D>& points);
+	void DrawPolygon(const Polygon& polygon);
 	void DrawBSplineCurve(const BSplineCurve& curve);
 	void DrawVertex(const Vertex& vertex);
 	void DrawEdge(const Edge& edge);
