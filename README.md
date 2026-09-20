@@ -17,10 +17,13 @@ CAD kernels, mesh processing systems, and computational geometry engines.
 - 2D Polygon Representation
 - Polygon Rendering
 - Polygon View Fitting
+- Polygon Area (Shoelace Formula)
+- Polygon Orientation (CW/CCW)
+- Point-In-Polygon (Ray Casting)
 
  
 ## OBJ Mesh Rendering
-The Standford Bunny (Vertices: 35947, Faces: 69451)
+The Stanford Bunny (Vertices: 35947, Faces: 69451)
 | Source Mesh | Geometry Algorithms |
 |------------|------------|
 | ![GeometryAlgorithms](Bunny.png)  | ![GeometryAlgorithms](Bunny_Wireframe.png) |
@@ -35,8 +38,8 @@ The Standford Bunny (Vertices: 35947, Faces: 69451)
 ## Roadmap
 ### Computational Geometry
 - [x] Polygon Rendering
-- [ ] Polygon Area Calculation
-- [ ] Point In Polygon
+- [x] Polygon Area Calculation
+- [x] Point In Polygon (PIP)
 - [ ] Line Segment Intersection
 - [ ] Polygon Triangulation
 - [ ] Convex Polygon Clipping
