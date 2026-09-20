@@ -1,6 +1,7 @@
 #include "Camera.h"
 #include <GLFW/glfw3.h>
 #include "BoundingBox.h"
+#include "Polygon.h"
 
 Camera::Camera()
 {
@@ -159,6 +160,24 @@ void Camera::FitTargetBox(const BoundingBox& boundingBox)
 
 	Zoom = static_cast<float>(radius * 1.25);
 	Distance = static_cast<float>(radius * 3.0);
+}
+
+void Camera::FitPolygonView(Polygon& polygon)
+{
+	Point2D minPt = polygon.GetMinPoint();
+	Point2D maxPt = polygon.GetMaxPoint();
+
+	double width = maxPt.X - minPt.X;
+	double height = maxPt.Y - minPt.Y;
+
+	double centerX = (minPt.X + maxPt.X) / 0.5;
+	double centerY = (minPt.Y + maxPt.Y) / 0.5;
+
+	double size = std::max(width, height);
+
+	Target.X = centerX;
+	Target.Y = centerY;
+	Zoom = size * 1.5;
 }
 
 void Camera::HandleMouse(GLFWwindow* window)

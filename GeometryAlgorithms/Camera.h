@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include "Point3D.h"
 #include "BoundingBox.h"
+#include "Polygon.h"
 
 class Camera
 {
@@ -29,6 +30,7 @@ public:
 	void ApplyView();
 	void HandleInput(GLFWwindow* window);
 	void FitTargetBox(const BoundingBox& boundingBox);
+	void FitPolygonView(Polygon& polygon);
 	void HandleMouse(GLFWwindow* window);
 	void HandleScroll(double offset);
 };

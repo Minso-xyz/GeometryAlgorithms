@@ -52,6 +52,9 @@ int main()
 
 	//LoadBunny(camera);  // Load the Bunny OBJ file and set the view
 
+	// Fit the view as the size of the polygon
+	camera.FitPolygonView(square);
+
 	while (!glfwWindowShouldClose(window))
 	{
 		int width;
