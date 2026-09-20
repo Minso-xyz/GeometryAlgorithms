@@ -1,9 +1,10 @@
 # Geometry Algorithms
- 
-Interactive geometry and mesh processing experiments
-written in C++ and OpenGL.
+This project explores fundamental geometry algorithms used in
+CAD kernels, mesh processing systems, and computational geometry engines.
  
 ## Current Features
+
+### Mesh Processing
 - OBJ Loader
 - Triangle Mesh Rendering
 - Orbit Camera
@@ -11,6 +12,11 @@ written in C++ and OpenGL.
 - Stanford Bunny Rendering
 - Face Normal Visualization
 - Vertex Normal Visualization
+
+### Computational Geometry
+- 2D Polygon Representation
+- Polygon Rendering
+- Polygon View Fitting
 
  
 ## OBJ Mesh Rendering
@@ -27,6 +33,18 @@ The Standford Bunny (Vertices: 35947, Faces: 69451)
 
  
 ## Roadmap
+### Computational Geometry
+- [x] Polygon Rendering
+- [ ] Polygon Area Calculation
+- [ ] Point In Polygon
+- [ ] Line Segment Intersection
+- [ ] Polygon Triangulation
+- [ ] Convex Polygon Clipping
+- [ ] Polygon Boolean Operations
+- [ ] Polygon Offset
+- [ ] SVG Export
+ 
+### Mesh Processing
 - [x] OBJ Loader
 - [x] Wireframe Mesh Rendering
 - [x] Face Normal Visualization
@@ -36,4 +54,7 @@ The Standford Bunny (Vertices: 35947, Faces: 69451)
 - [ ] Mesh Simplification
 - [ ] Subdivision
 - [ ] Curvature Visualization
+ 
+### Research
+- [ ] Geometry Processing Pipeline
 - [ ] Gaussian Splatting Experiments
