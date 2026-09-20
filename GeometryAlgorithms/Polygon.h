@@ -10,6 +10,9 @@ public:
 public:
 	Point2D GetMinPoint() const;
 	Point2D GetMaxPoint() const;
+	double CalculateSignedArea() const;
 	double CalculateArea() const;
+	bool IsClockwise() const;
+	bool IsCounterClockwise() const;
 	
 };

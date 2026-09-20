@@ -27,7 +27,7 @@ Point2D Polygon::GetMaxPoint() const
 }
 
 // Shoelace formula
-double Polygon::CalculateArea() const
+double Polygon::CalculateSignedArea() const
 {
 	double sum1 = 0;
 	double sum2 = 0;
@@ -42,7 +42,23 @@ double Polygon::CalculateArea() const
 		sum2 = sum2 + Vertices[i].Y * Vertices[next].X;
 	}
 
-	double area = std::abs(sum1 - sum2) * 0.5;
-	return area;
+	double signedArea = (sum1 - sum2) * 0.5;
+	return signedArea;
+}
+
+double Polygon::CalculateArea() const
+{
+	double signedArea = CalculateSignedArea();
+	return std::abs(signedArea);
+}
+
+bool Polygon::IsClockwise() const
+{
+	return CalculateSignedArea() > 0;
+}
+
+bool Polygon::IsCounterClockwise() const
+{
+	return !IsClockwise();
 }
 
