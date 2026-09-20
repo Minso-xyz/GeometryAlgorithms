@@ -57,7 +57,10 @@ int main()
 	
 	// Calculate the area of the polygon
 	double area = square.CalculateArea();
-	std::cout << area << std::endl;;
+
+	// Check if the polygon contains the point
+	bool contains = square.ContainsPoint(Point2D(3,5));
+	std::cout << contains << std::endl;;
 
 	while (!glfwWindowShouldClose(window))
 	{

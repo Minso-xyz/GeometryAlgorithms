@@ -14,5 +14,6 @@ public:
 	double CalculateArea() const;
 	bool IsClockwise() const;
 	bool IsCounterClockwise() const;
+	bool ContainsPoint(const Point2D& point) const;
 	
 };
