@@ -54,6 +54,10 @@ int main()
 
 	// Fit the view as the size of the polygon
 	camera.FitPolygonView(square);
+	
+	// Calculate the area of the polygon
+	double area = square.CalculateArea();
+	std::cout << area << std::endl;;
 
 	while (!glfwWindowShouldClose(window))
 	{
