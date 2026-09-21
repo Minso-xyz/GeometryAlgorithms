@@ -60,7 +60,10 @@ int main()
 
 	// Check if the polygon contains the point
 	bool contains = square.ContainsPoint(Point2D(3,5));
-	std::cout << contains << std::endl;;
+
+	// Define the segment
+	Segment2D segment(Point2D(0, 0), Point2D(10, 10));
+	
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -79,7 +82,9 @@ int main()
 
 		//RenderBunny(renderer, objMesh);   // Render the bunny meshes
 
-		renderer.DrawPolygon(square);
+		renderer.DrawPolygon(square);   // Draw square
+
+		renderer.DrawSegment(segment);   // Draw segment
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();   // handle the mouse/keyboard inputs

@@ -9,6 +9,7 @@
 #include "Triangle.h"
 #include "Point2D.h"
 #include "Polygon.h"
+#include "Segment2D.h"
 
 class Renderer
 {
@@ -31,4 +32,5 @@ public:
 	void DrawBoundingBox(const BoundingBox& boundingBox);
 	void DrawNormal(Triangle triangle);
 	void DrawVertexNormal(const Vertex& vertex);
+	void DrawSegment(const Segment2D& segment);
 };

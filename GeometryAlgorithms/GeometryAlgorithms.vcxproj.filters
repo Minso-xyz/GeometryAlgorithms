@@ -62,5 +62,8 @@
     <ClInclude Include="Polygon.h">
       <Filter>ComputationalGeometry</Filter>
     </ClInclude>
+    <ClInclude Include="Segment2D.h">
+      <Filter>ComputationalGeometry</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

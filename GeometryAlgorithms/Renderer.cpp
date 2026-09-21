@@ -195,3 +195,8 @@ void Renderer::DrawCoordinateAxis()
 
 	glEnd();
 }
+
+void Renderer:: DrawSegment(const Segment2D& segment)
+{
+	DrawLine2D(segment.Start, segment.End);
+}
