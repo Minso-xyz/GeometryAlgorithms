@@ -18,7 +18,7 @@ public:
 	}
 
 public:
-	double Orientation(const Point2D& a, const Point2D& b, const Point2D& p)
+	double Orientation(const Point2D& a, const Point2D& b, const Point2D& p) const
 	{
 		Vector2D ab = a.VectorTo(b);
 		Vector2D ap = a.VectorTo(p);
@@ -50,7 +50,35 @@ public:
 		{
 			intersects = true;
 		}
+
+		const double epsilon = 1e-9;
+
+		// if the end points meet
+		if (std::abs(o1) < epsilon && IsPointOnSegment(c)) intersects = true;  // point c is on the segment ab
+		if (std::abs(o2) < epsilon && IsPointOnSegment(d)) intersects = true;  // point d is on the segment ab
+		if (std::abs(o3) < epsilon && IsPointOnSegment(a)) intersects = true;  // point a is on the segment cd
+		if (std::abs(o4) < epsilon && IsPointOnSegment(b)) intersects = true;  // point b is on the segment cd
+
 		return intersects;
+	}
+
+public:
+	bool IsPointOnSegment(const Point2D& point) const
+	{
+		const double epsilon = 1e-9;
+
+		double orientation = Orientation(Start, End, point);
+
+		if (std::abs(orientation) > epsilon)
+		{
+			return false;
+		}
+
+		// Check if point is on the segment
+		bool withinX = point.X >= std::min(Start.X, End.X) - epsilon && point.X <= std::max(Start.X, End.X) + epsilon;
+		bool withinY = point.Y >= std::min(Start.Y, End.Y) - epsilon && point.Y <= std::max(Start.Y, End.Y) + epsilon;
+
+		return withinX && withinY;
 	}
 
 public:
