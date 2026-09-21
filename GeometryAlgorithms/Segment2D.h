@@ -31,7 +31,26 @@ public:
 public:
 	bool Intersects(const Segment2D& other)
 	{
+		bool intersects = false;
 
+		// Points of the segments
+		Point2D a = Start;
+		Point2D b = End;
+		Point2D c = other.Start;
+		Point2D d = other.End;
+
+		// orientations of the segments
+		double o1 = Orientation(a, b, c);
+		double o2 = Orientation(a, b, d);
+		double o3 = Orientation(c, d, a);
+		double o4 = Orientation(c, d, b);
+
+		// if the orientation is the opposite, the segments intersect each other
+		if (((o1 < 0) != (o2 < 0)) && ((o3 < 0) != (o4 < 0))) 
+		{
+			intersects = true;
+		}
+		return intersects;
 	}
 
 public:
