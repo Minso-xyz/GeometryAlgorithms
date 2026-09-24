@@ -82,10 +82,26 @@ public:
 	}
 
 public:
-	Point2D IntersectionPoint()
+	Point2D IntersectionPoint(const Segment2D& other)
 	{
+		// Points of the segments
+		Point2D a = Start;
+		Point2D b = End;
+		Point2D c = other.Start;
+		Point2D d = other.End;
 
+		Vector2D ab = a.VectorTo(b);
+		Vector2D cd = c.VectorTo(d);
+		Vector2D ac = a.VectorTo(c);
+		
+		double t = ac.Cross(cd) / ab.Cross(cd);
+
+		// P = A + t (B - A)
+		Point2D p = a + (ab * t);
+
+		return p;
 	}
+
 
 	// Triangluation
 	// Boolean
