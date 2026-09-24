@@ -93,6 +93,13 @@ public:
 		Vector2D ab = a.VectorTo(b);
 		Vector2D cd = c.VectorTo(d);
 		Vector2D ac = a.VectorTo(c);
+
+		double denominator = ab.Cross(cd);
+
+		if (std::abs(denominator) < 1e-9)  // tolerance
+		{
+			throw std::runtime_error("No intersection point exists.");   // Segment AB and CD are in parallel
+		}
 		
 		double t = ac.Cross(cd) / ab.Cross(cd);
 
