@@ -1,4 +1,5 @@
-#include "Polygon.h"
+﻿#include "Polygon.h"
+#include "Segment2D.h"
 
 Point2D Polygon::GetMinPoint() const
 {
@@ -92,5 +93,60 @@ bool Polygon::ContainsPoint(const Point2D& point) const
 		result = true;
 	}
 	return result;
+}
+
+// Sutherland-Hodgman algorithm (Clipping polygons)
+Polygon Polygon::ClipAgainstEdge(const Segment2D& segment) const
+{
+	Polygon clippedPolygon;
+
+	int count = Vertices.size();
+
+	for (int i = 0; i < count; i++)
+	{
+		int next = (1 + i) % count;
+
+		Point2D current = Vertices[i];
+		Point2D nextPoint = Vertices[next];
+		Segment2D polygonEdge = Segment2D(current, nextPoint);
+		
+		double currentOrientation = segment.Orientation(current);
+		double nextOrientation = segment.Orientation(nextPoint);
+
+		// assuming the clip polygon vertices are CCW,
+		// the left side of each clipping edge is inside
+		bool currentInside = currentOrientation >= 0;
+		bool nextInside = nextOrientation >= 0;
+
+		// Inside to Inside
+		if (currentInside && nextInside)
+		{
+			//clippedPolygon.Vertices.push_back(current);
+			clippedPolygon.Vertices.push_back(nextPoint);
+		}
+
+		// Inside to Outside
+		else if (currentInside && !nextInside)
+		{
+			Point2D intersectPoint = polygonEdge.IntersectionPoint(segment);
+			//clippedPolygon.Vertices.push_back(current);
+			clippedPolygon.Vertices.push_back(intersectPoint);
+		}
+
+		// Outside to Inside
+		if (!currentInside && nextInside)
+		{
+			Point2D intersectPoint = polygonEdge.IntersectionPoint(segment);
+			clippedPolygon.Vertices.push_back(nextPoint);
+			clippedPolygon.Vertices.push_back(intersectPoint);
+		}
+
+		// Outside to Outside
+		if (!currentInside && !nextInside)
+		{
+			// add nothing
+		}
+	}
+	return clippedPolygon;
 }
 
