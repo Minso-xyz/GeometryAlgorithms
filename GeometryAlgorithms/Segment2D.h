@@ -18,10 +18,10 @@ public:
 	}
 
 public:
-	double Orientation(const Point2D& a, const Point2D& b, const Point2D& p) const
+	double Orientation(const Point2D& p) const
 	{
-		Vector2D ab = a.VectorTo(b);
-		Vector2D ap = a.VectorTo(p);
+		Vector2D ab = Start.VectorTo(End);
+		Vector2D ap = Start.VectorTo(p);
 
 		double crossProduct = ab.Cross(ap);
 
@@ -40,10 +40,10 @@ public:
 		Point2D d = other.End;
 
 		// orientations of the segments
-		double o1 = Orientation(a, b, c);
-		double o2 = Orientation(a, b, d);
-		double o3 = Orientation(c, d, a);
-		double o4 = Orientation(c, d, b);
+		double o1 = Orientation(c);
+		double o2 = Orientation(d);
+		double o3 = other.Orientation(a);
+		double o4 = other.Orientation(b);
 
 		// if the orientation is the opposite, the segments intersect each other
 		if (((o1 < 0) != (o2 < 0)) && ((o3 < 0) != (o4 < 0))) 
@@ -67,7 +67,7 @@ public:
 	{
 		const double epsilon = 1e-9;
 
-		double orientation = Orientation(Start, End, point);
+		double orientation = Orientation(point);
 
 		if (std::abs(orientation) > epsilon)
 		{
