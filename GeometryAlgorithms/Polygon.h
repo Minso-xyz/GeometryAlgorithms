@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include "Point2D.h"
+#include "Segment2D.h"
+#include "Polygon.h"
 
 class Polygon
 {
