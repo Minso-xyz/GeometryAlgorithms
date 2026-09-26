@@ -27,14 +27,14 @@ void Renderer::DrawNormal(Triangle triangle)
 	Vector3D normal = triangle.Normal();
 	Point3D start = triangle.GetCenter();
 	Point3D end = start + normal * 0.005;
-	DrawLine2(Line3D(start, end));
+	DrawLine(Line3D(start, end));
 }
 
 void Renderer::DrawVertexNormal(const Vertex& vertex)
 {
 	Point3D start = vertex.Position;
 	Point3D end = vertex.Position + (vertex.Normal * 0.005);
-	DrawLine2(Line3D(start, end));
+	DrawLine(Line3D(start, end));
 }
 
 void Renderer::DrawPoint(const Point3D& point)
@@ -56,21 +56,11 @@ void Renderer::DrawLine(const Line3D& line)
 	glEnd();
 }
 
-void Renderer::DrawLine2(const Line3D& line)
+void Renderer::DrawLine2D(const Point2D& pt1, const Point2D& pt2, float width, float red, float green, float blue)
 {
-	glLineWidth(0.2f);
+	glLineWidth(width);
 	glBegin(GL_LINES);
-	glColor3f(1.0f, 0.0f, 1.0f);
-	glVertex3f((float)line.Start.X, (float)line.Start.Y, (float)line.Start.Z);
-	glVertex3f((float)line.End.X, (float)line.End.Y, (float)line.End.Z);
-	glEnd();
-}
-
-void Renderer::DrawLine2D(const Point2D& pt1, const Point2D& pt2)
-{
-	glLineWidth(0.2f);
-	glBegin(GL_LINES);
-	glColor3f(1.0f, 0.0f, 1.0f);
+	glColor3f(red, green, blue);
 	glVertex2f((float)pt1.X, (float)pt1.Y);
 	glVertex2f((float)pt2.X, (float)pt2.Y);
 	glEnd();
@@ -108,13 +98,13 @@ void Renderer::DrawPolyline(const std::vector<Point3D>& points)
 	glEnd();
 }
 
-void Renderer::DrawPolygon(const Polygon& polygon)
+void Renderer::DrawPolygon(const Polygon& polygon, float width, float red, float green, float blue)
 {
 	for (int i = 0; i < polygon.Vertices.size()-1; i++)
 	{
-		DrawLine2D(polygon.Vertices[i], polygon.Vertices[i + 1]);
+		DrawLine2D(polygon.Vertices[i], polygon.Vertices[i + 1], width, red, green, blue);
 	}
-	DrawLine2D(polygon.Vertices[polygon.Vertices.size() - 1], polygon.Vertices[0]);
+	DrawLine2D(polygon.Vertices[polygon.Vertices.size() - 1], polygon.Vertices[0], width, red, green, blue);
 }
 
 void Renderer::DrawBSplineCurve(const BSplineCurve& curve)
@@ -196,7 +186,7 @@ void Renderer::DrawCoordinateAxis()
 	glEnd();
 }
 
-void Renderer:: DrawSegment(const Segment2D& segment)
+void Renderer:: DrawSegment(const Segment2D& segment, float width, float red, float green, float blue)
 {
-	DrawLine2D(segment.Start, segment.End);
+	DrawLine2D(segment.Start, segment.End, 0.2f, 1.0f, 1.0f, 1.0f);
 }

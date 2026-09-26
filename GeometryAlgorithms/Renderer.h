@@ -18,11 +18,10 @@ public:
 	void DrawCoordinateAxis();
 	void DrawPoint(const Point3D& point);
 	void DrawLine(const Line3D& line);
-	void DrawLine2(const Line3D& line);
-	void DrawLine2D(const Point2D& pt1, const Point2D& pt2);
+	void DrawLine2D(const Point2D& pt1, const Point2D& pt2, float width, float red, float green, float blue);
 	void DrawCircle(const Circle3D& circle);
 	void DrawPolyline(const std::vector<Point3D>& points);
-	void DrawPolygon(const Polygon& polygon);
+	void DrawPolygon(const Polygon& polygon, float width, float red, float green, float blue);
 	void DrawBSplineCurve(const BSplineCurve& curve);
 	void DrawVertex(const Vertex& vertex);
 	void DrawEdge(const Edge& edge);
@@ -32,5 +31,5 @@ public:
 	void DrawBoundingBox(const BoundingBox& boundingBox);
 	void DrawNormal(Triangle triangle);
 	void DrawVertexNormal(const Vertex& vertex);
-	void DrawSegment(const Segment2D& segment);
+	void DrawSegment(const Segment2D& segment, float width, float red, float green, float blue);
 };
