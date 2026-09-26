@@ -27,22 +27,42 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	glfwSetScrollCallback(window, ScrollCallback);
 
-	Mesh meshTriangle;
-	meshTriangle.Triangles.push_back(
-		Triangle(
-			Point3D(-100, -100, 0),
-			Point3D(100, -100, 0),
-			Point3D(0, 100, 0)
-		));
+	//Mesh meshTriangle;
+	//meshTriangle.Triangles.push_back(
+	//	Triangle(
+	//		Point3D(-100, -100, 0),
+	//		Point3D(100, -100, 0),
+	//		Point3D(0, 100, 0)
+	//	));
 
-	Polygon square;
+	/*Polygon square;
 	square.Vertices =
 	{
 	{0,0},
 	{10,0},
 	{10,10},
 	{0,10}
+	};*/
+
+	Polygon subjectPolygon;
+	subjectPolygon.Vertices =
+	{
+	Point2D(-6.0, -4.0),
+	Point2D(6.0, -4.0),
+	Point2D(6.0, 4.0),
+	Point2D(-6.0, 4.0)
 	};
+
+	Polygon clipPolygon;
+	clipPolygon.Vertices =
+	{
+	Point2D(-2.0, -6.0),
+	Point2D(7.0, -1.0),
+	Point2D(3.0, 6.0),
+	Point2D(-4.0, 5.0)
+	};
+
+	Polygon clipped = subjectPolygon.Clip(clipPolygon);
 
 	Renderer renderer;
 	Camera camera;
@@ -53,16 +73,16 @@ int main()
 	//LoadBunny(camera);  // Load the Bunny OBJ file and set the view
 
 	// Fit the view as the size of the polygon
-	camera.FitPolygonView(square);
+	camera.FitPolygonView(subjectPolygon);
 	
-	// Calculate the area of the polygon
-	double area = square.CalculateArea();
+	//// Calculate the area of the polygon
+	//double area = square.CalculateArea();
 
-	// Check if the polygon contains the point
-	bool contains = square.ContainsPoint(Point2D(3,5));
+	//// Check if the polygon contains the point
+	//bool contains = square.ContainsPoint(Point2D(3,5));
 
-	// Define the segment
-	Segment2D segment(Point2D(0, 0), Point2D(10, 10));
+	//// Define the segment
+	//Segment2D segment(Point2D(0, 0), Point2D(10, 10));
 	
 
 	while (!glfwWindowShouldClose(window))
@@ -82,9 +102,12 @@ int main()
 
 		//RenderBunny(renderer, objMesh);   // Render the bunny meshes
 
-		renderer.DrawPolygon(square);   // Draw square
+		//renderer.DrawPolygon(square);   // Draw square
+		renderer.DrawPolygon(subjectPolygon, 0.2f, 1.0f, 0.0f, 1.0f);   // Draw subjectPolygon
+		renderer.DrawPolygon(clipPolygon, 0.2f, 0.0f, 0.0f, 1.0f);   // Draw clipPolygon
+		renderer.DrawPolygon(clipped, 5.0f, 1.0f, 1.0f, 1.0f);   // Draw clippedPolygon
 
-		renderer.DrawSegment(segment);   // Draw segment
+		//renderer.DrawSegment(segment);   // Draw segment
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();   // handle the mouse/keyboard inputs
