@@ -16,5 +16,6 @@ public:
 	bool IsCounterClockwise() const;
 	bool ContainsPoint(const Point2D& point) const;
 	Polygon ClipAgainstEdge(const Segment2D& segment) const;
+	Polygon Clip(const Polygon& clipPolygon) const;
 	
 };

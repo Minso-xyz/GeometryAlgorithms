@@ -150,3 +150,23 @@ Polygon Polygon::ClipAgainstEdge(const Segment2D& segment) const
 	return clippedPolygon;
 }
 
+Polygon Polygon::Clip(const Polygon& clipPolygon) const
+{
+	Polygon result = *this;
+
+	int count = clipPolygon.Vertices.size();
+
+	for (int i = 0; i < count; i++)
+	{
+		int next = (i + 1) % count;
+
+		Point2D start = clipPolygon.Vertices[i];
+		Point2D end = clipPolygon.Vertices[next];
+
+		Segment2D clipEdge(start, end);
+
+		result = result.ClipAgainstEdge(clipEdge);
+	}
+	return result;
+}
+
