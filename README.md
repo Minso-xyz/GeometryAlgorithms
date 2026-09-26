@@ -26,6 +26,7 @@ CAD, geometry processing, and computational geometry systems.
 - 2D Cross Product and Orientation Test
 - Line Segment Intersection Test
 - Line Segment Intersection Point Calculation
+- Convex Polygon Clipping (Sutherland-Hodgman)
 
  
 ## OBJ Mesh Rendering
@@ -48,7 +49,7 @@ The Stanford Bunny (Vertices: 35947, Faces: 69451)
 - [x] Point In Polygon (PIP)
 - [x] Line Segment Intersection
 - [x] Line Segment Intersection Point Calculation
-- [ ] Convex Polygon Clipping (Sutherland-Hodgman)
+- [x] Convex Polygon Clipping (Sutherland-Hodgman)
 - [ ] Polygon Triangulation
 - [ ] Polygon Boolean Operations
 - [ ] Polygon Offset
