@@ -39,7 +39,7 @@ double Polygon::CalculateSignedArea() const
 	{
 		int next = (i + 1) % count;
 
-		sum1  = sum1 + Vertices[i].X * Vertices[next].Y;
+		sum1 = sum1 + Vertices[i].X * Vertices[next].Y;
 		sum2 = sum2 + Vertices[i].Y * Vertices[next].X;
 	}
 
@@ -134,15 +134,15 @@ Polygon Polygon::ClipAgainstEdge(const Segment2D& segment) const
 		}
 
 		// Outside to Inside
-		if (!currentInside && nextInside)
+		else if (!currentInside && nextInside)
 		{
 			Point2D intersectPoint = polygonEdge.IntersectionPoint(segment);
-			clippedPolygon.Vertices.push_back(nextPoint);
 			clippedPolygon.Vertices.push_back(intersectPoint);
+			clippedPolygon.Vertices.push_back(nextPoint);
 		}
 
 		// Outside to Outside
-		if (!currentInside && !nextInside)
+		else if (!currentInside && !nextInside)
 		{
 			// add nothing
 		}
