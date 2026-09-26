@@ -1,6 +1,9 @@
 # Geometry Algorithms
-This project explores fundamental geometry algorithms used in
-CAD kernels, mesh processing systems, and computational geometry engines.
+An interactive C++ and OpenGL playground for implementing fundamental
+computational geometry and mesh processing algorithms from scratch.
+ 
+The project explores geometry operations commonly encountered in
+CAD, geometry processing, and computational geometry systems.
  
 ## Current Features
 
@@ -19,7 +22,10 @@ CAD kernels, mesh processing systems, and computational geometry engines.
 - Polygon View Fitting
 - Polygon Area (Shoelace Formula)
 - Polygon Orientation (CW/CCW)
-- Point-In-Polygon (Ray Casting)
+- Point-in-Polygon Test (Ray Casting)
+- 2D Cross Product and Orientation Test
+- Line Segment Intersection Test
+- Line Segment Intersection Point Calculation
 
  
 ## OBJ Mesh Rendering
@@ -40,9 +46,10 @@ The Stanford Bunny (Vertices: 35947, Faces: 69451)
 - [x] Polygon Rendering
 - [x] Polygon Area Calculation
 - [x] Point In Polygon (PIP)
-- [ ] Line Segment Intersection
+- [x] Line Segment Intersection
+- [x] Line Segment Intersection Point Calculation
+- [ ] Convex Polygon Clipping (Sutherland-Hodgman)
 - [ ] Polygon Triangulation
-- [ ] Convex Polygon Clipping
 - [ ] Polygon Boolean Operations
 - [ ] Polygon Offset
 - [ ] SVG Export
