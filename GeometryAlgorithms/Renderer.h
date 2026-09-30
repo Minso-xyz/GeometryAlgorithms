@@ -16,14 +16,14 @@ class Renderer
 public:
 
 	void DrawCoordinateAxis();
-	void DrawPoint(const Point3D& point);
+	void DrawPoint(const Point3D& point, float width, float red, float green, float blue);
 	void DrawLine(const Line3D& line);
 	void DrawLine2D(const Point2D& pt1, const Point2D& pt2, float width, float red, float green, float blue);
 	void DrawCircle(const Circle3D& circle);
 	void DrawPolyline(const std::vector<Point3D>& points);
 	void DrawPolygon(const Polygon& polygon, float width, float red, float green, float blue);
 	void DrawBSplineCurve(const BSplineCurve& curve);
-	void DrawVertex(const Vertex& vertex);
+	void DrawVertex(const Vertex& vertex, float width, float red, float green, float blue);
 	void DrawEdge(const Edge& edge);
 	void DrawCube();
 	void DrawMesh(const Mesh& mesh);

@@ -37,11 +37,11 @@ void Renderer::DrawVertexNormal(const Vertex& vertex)
 	DrawLine(Line3D(start, end));
 }
 
-void Renderer::DrawPoint(const Point3D& point)
+void Renderer::DrawPoint(const Point3D& point, float width, float red, float green, float blue)
 {
-	glPointSize(15.0f);
+	glPointSize(width);
 	glBegin(GL_POINTS);
-	glColor3f(0.0f, 1.0f, 0.0f);
+	glColor3f(red, green, blue);
 	glVertex3f((float)point.X, (float)point.Y, (float)point.Z);
 	glEnd();
 }
@@ -113,9 +113,9 @@ void Renderer::DrawBSplineCurve(const BSplineCurve& curve)
 	DrawPolyline(points);
 }
 
-void Renderer::DrawVertex(const Vertex& vertex)
+void Renderer::DrawVertex(const Vertex& vertex, float width, float red, float green, float blue)
 {
-	Renderer::DrawPoint(vertex.Position);
+	Renderer::DrawPoint(vertex.Position, width, red, green, blue);
 }
 
 void Renderer::DrawEdge(const Edge& edge)

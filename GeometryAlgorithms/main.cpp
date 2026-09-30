@@ -113,7 +113,7 @@ int main()
 		for (const Point2D& point : intersections)
 		{
 			Point3D pointToRender = Point3D(point.X, point.Y, 0);
-			renderer.DrawPoint(pointToRender);
+			renderer.DrawPoint(pointToRender, 15.0f, 0.0f, 1.0f, 0.0f);
 		}
 
 		//renderer.DrawSegment(segment);   // Draw segment
