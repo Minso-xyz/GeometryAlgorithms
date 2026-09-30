@@ -64,6 +64,8 @@ int main()
 
 	Polygon clipped = subjectPolygon.Clip(clipPolygon);
 
+	std::vector<Point2D> intersections = subjectPolygon.FindIntersections(clipPolygon);
+
 	Renderer renderer;
 	Camera camera;
 	gCamera = &camera;
@@ -106,6 +108,13 @@ int main()
 		renderer.DrawPolygon(subjectPolygon, 0.2f, 1.0f, 0.0f, 1.0f);   // Draw subjectPolygon
 		renderer.DrawPolygon(clipPolygon, 0.2f, 0.0f, 0.0f, 1.0f);   // Draw clipPolygon
 		renderer.DrawPolygon(clipped, 5.0f, 1.0f, 1.0f, 1.0f);   // Draw clippedPolygon
+
+		// Draw intersection points
+		for (const Point2D& point : intersections)
+		{
+			Point3D pointToRender = Point3D(point.X, point.Y, 0);
+			renderer.DrawPoint(pointToRender);
+		}
 
 		//renderer.DrawSegment(segment);   // Draw segment
 

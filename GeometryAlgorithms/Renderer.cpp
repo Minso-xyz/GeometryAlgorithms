@@ -39,9 +39,9 @@ void Renderer::DrawVertexNormal(const Vertex& vertex)
 
 void Renderer::DrawPoint(const Point3D& point)
 {
-	glPointSize(10.0f);
+	glPointSize(15.0f);
 	glBegin(GL_POINTS);
-	glColor3f(1.0f, 0.0f, 1.0f);
+	glColor3f(0.0f, 1.0f, 0.0f);
 	glVertex3f((float)point.X, (float)point.Y, (float)point.Z);
 	glEnd();
 }
