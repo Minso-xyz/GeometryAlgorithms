@@ -197,3 +197,17 @@ std::vector<Point2D> Polygon::FindIntersections(const Polygon& other) const
 	return intersections;
 }
 
+std::vector<Point2D> Polygon::FindOutsideVertices(const Polygon& other) const
+{
+	std::vector<Point2D> outsideVertices;
+
+	for (const Point2D& vertex : Vertices)
+	{
+		if (!other.ContainsPoint(vertex))
+		{
+			outsideVertices.push_back(vertex);
+		}
+	}
+	return outsideVertices;
+}
+

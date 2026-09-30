@@ -20,5 +20,6 @@ public:
 	Polygon ClipAgainstEdge(const Segment2D& segment) const;
 	Polygon Clip(const Polygon& clipPolygon) const;
 	std::vector<Point2D> FindIntersections(const Polygon& other) const;
+	std::vector<Point2D> FindOutsideVertices(const Polygon& other) const;
 	
 };
