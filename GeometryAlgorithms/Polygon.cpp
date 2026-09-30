@@ -170,3 +170,30 @@ Polygon Polygon::Clip(const Polygon& clipPolygon) const
 	return result;
 }
 
+std::vector<Point2D> Polygon::FindIntersections(const Polygon& other) const
+{
+	std::vector<Point2D> intersections;
+
+	int countA = Vertices.size();  // The number of Polygon A vertices
+	int countB = other.Vertices.size();   // The number of Polygon B vertices
+
+	for (int i = 0; i< countA; i++) 
+	{
+		int nextA = (i + 1) % countA;
+		Segment2D edgeA(Vertices[i], Vertices[nextA]);
+
+		for (int j = 0; j < countB; j++)
+		{
+			int nextB = (j + 1) % countB;
+			Segment2D edgeB(other.Vertices[j], other.Vertices[nextB]);
+
+			if (edgeA.Intersects(edgeB))
+			{
+				Point2D intersectionPoint = edgeA.IntersectionPoint(edgeB);
+				intersections.push_back(intersectionPoint);
+			}
+		}
+	}
+	return intersections;
+}
+
