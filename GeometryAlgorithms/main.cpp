@@ -64,7 +64,11 @@ int main()
 
 	Polygon clipped = subjectPolygon.Clip(clipPolygon);
 
-	std::vector<Point2D> intersections = subjectPolygon.FindIntersections(clipPolygon);
+	std::vector<Point2D> intersections = subjectPolygon.FindIntersections(clipPolygon);  // Intersection points
+
+	// outside vertices
+	std::vector<Point2D> outsideVertices1 = subjectPolygon.FindOutsideVertices(clipPolygon);
+	std::vector<Point2D> outsideVertices2 = clipPolygon.FindOutsideVertices(subjectPolygon);
 
 	Renderer renderer;
 	Camera camera;
@@ -114,6 +118,18 @@ int main()
 		{
 			Point3D pointToRender = Point3D(point.X, point.Y, 0);
 			renderer.DrawPoint(pointToRender, 15.0f, 0.0f, 1.0f, 0.0f);
+		}
+
+		// Draw outside vertices
+		for (const Point2D& point : outsideVertices1)
+		{
+			Point3D pointToRender = Point3D(point.X, point.Y, 0);
+			renderer.DrawPoint(pointToRender, 15.0f, 1.0f, 0.0f, 0.0f);
+		}
+		for (const Point2D& point : outsideVertices2)
+		{
+			Point3D pointToRender = Point3D(point.X, point.Y, 0);
+			renderer.DrawPoint(pointToRender, 15.0f, 1.0f, 0.0f, 0.0f);
 		}
 
 		//renderer.DrawSegment(segment);   // Draw segment
