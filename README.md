@@ -42,6 +42,20 @@ The Stanford Bunny (Vertices: 35947, Faces: 69451)
 | ![GeometryAlgorithms](FaceNormals.png)  | ![GeometryAlgorithms](VertexNormals.png) |
 
  
+## Convex Polygon Clipping
+Convex polygon clipping using the Sutherland-Hodgman algorithm.
+ 
+- Half-plane classification using orientation tests
+- Segment-edge intersection calculation
+- Iterative clipping against each boundary edge
+- CCW clip polygon handling
+
+ ![GeometryAlgorithms](ClippingPolygons.png)
+
+Blue and magenta: input polygons / White: Clipped Polygon
+
+
+ 
 ## Roadmap
 ### Computational Geometry
 - [x] Polygon Rendering
