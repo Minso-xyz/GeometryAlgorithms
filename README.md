@@ -52,7 +52,7 @@ Convex polygon clipping using the Sutherland-Hodgman algorithm.
 
  ![GeometryAlgorithms](ClippingPolygons.png)
 
-Blue and magenta: input polygons / White: Clipped Polygon
+Blue and magenta: input polygons / White: Clipped Polygon / Green: Intersection Points
 
 
  
