@@ -1,16 +1,7 @@
 ﻿#include "Polygon.h"
 #include "Segment2D.h"
 
-struct PolygonIntersection
-{
-	Point2D Point;
-
-	int EdgeIndexA;
-	int EdgeIndexB;
-
-	/*double tA;
-	double tB;*/
-};
+const double epsilon = 1e-9;
 
 Point2D Polygon::GetMinPoint() const
 {
@@ -181,12 +172,9 @@ Polygon Polygon::Clip(const Polygon& clipPolygon) const
 	return result;
 }
 
-
-
-std::vector<Point2D> Polygon::FindIntersections(const Polygon& other) const
+std::vector<Polygon::PolygonIntersection> Polygon::FindIntersections(const Polygon& other) const
 {
-	//std::vector<PolygonIntersection> intersections;
-	std::vector<Point2D> intersections;
+	std::vector<PolygonIntersection> intersections;
 
 	int countA = Vertices.size();  // The number of Polygon A vertices
 	int countB = other.Vertices.size();   // The number of Polygon B vertices
@@ -205,15 +193,31 @@ std::vector<Point2D> Polygon::FindIntersections(const Polygon& other) const
 			{
 				Point2D intersectionPoint = edgeA.IntersectionPoint(edgeB);
 
-				/*PolygonIntersection polygonIntersection;
-				polygonIntersection.Point = intersectionPoint;*/
-				/*polygonIntersection.EdgeIndexA = i;
-				polygonIntersection.EdgeIndexB = j;*/
-			/*	polygonIntersection.tA = 
-				polygonIntersection.tB = */
+				PolygonIntersection polygonIntersection;
+				polygonIntersection.Point = intersectionPoint;
+				polygonIntersection.EdgeIndexA = i;
+				polygonIntersection.EdgeIndexB = j;
 
-				//intersections.push_back(polygonIntersection);
-				intersections.push_back(intersectionPoint);
+				// Calculate tA, tB
+				Vector2D ab = Vertices[i].VectorTo(Vertices[nextA]);
+				Vector2D cd = other.Vertices[j].VectorTo(other.Vertices[nextB]);
+				Vector2D ac = Vertices[i].VectorTo(other.Vertices[j]);
+
+				double denominator = ab.Cross(cd);
+
+				if (std::abs(denominator) < epsilon)
+				{
+					// 2 segments are in parallel / collinear
+					continue;
+				}
+
+				double tA = ac.Cross(cd) / denominator;
+				double tB = ac.Cross(ab) / denominator;
+
+				polygonIntersection.tA = tA;
+				polygonIntersection.tB = tB;
+					
+				intersections.push_back(polygonIntersection);
 			}
 		}
 	}

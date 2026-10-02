@@ -6,7 +6,7 @@
 
 class Polygon
 {
-
+public:
 	struct PolygonIntersection
 	{
 		Point2D Point;
@@ -14,8 +14,8 @@ class Polygon
 		int EdgeIndexA;
 		int EdgeIndexB;
 
-		/*double tA;
-		double tB;*/
+		double tA;
+		double tB;
 	};
 public:
 	std::vector<Point2D> Vertices;
@@ -30,7 +30,7 @@ public:
 	bool ContainsPoint(const Point2D& point) const;
 	Polygon ClipAgainstEdge(const Segment2D& segment) const;
 	Polygon Clip(const Polygon& clipPolygon) const;
-	std::vector<Point2D> FindIntersections(const Polygon& other) const;
+	std::vector<PolygonIntersection> FindIntersections(const Polygon& other) const;
 	std::vector<Point2D> FindOutsideVertices(const Polygon& other) const;
 	
 };
