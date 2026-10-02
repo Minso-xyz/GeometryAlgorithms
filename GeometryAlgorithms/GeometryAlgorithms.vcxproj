@@ -134,6 +134,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Segment2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\GeoKernel3D\GeoKernel3D\GeoKernel3D.vcxproj">
