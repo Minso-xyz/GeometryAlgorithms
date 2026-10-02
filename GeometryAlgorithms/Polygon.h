@@ -6,6 +6,17 @@
 
 class Polygon
 {
+
+	struct PolygonIntersection
+	{
+		Point2D Point;
+
+		int EdgeIndexA;
+		int EdgeIndexB;
+
+		/*double tA;
+		double tB;*/
+	};
 public:
 	std::vector<Point2D> Vertices;
 

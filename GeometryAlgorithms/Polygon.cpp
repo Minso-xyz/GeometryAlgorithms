@@ -1,6 +1,17 @@
 ﻿#include "Polygon.h"
 #include "Segment2D.h"
 
+struct PolygonIntersection
+{
+	Point2D Point;
+
+	int EdgeIndexA;
+	int EdgeIndexB;
+
+	/*double tA;
+	double tB;*/
+};
+
 Point2D Polygon::GetMinPoint() const
 {
 	double minX = Vertices[0].X;
@@ -170,8 +181,11 @@ Polygon Polygon::Clip(const Polygon& clipPolygon) const
 	return result;
 }
 
+
+
 std::vector<Point2D> Polygon::FindIntersections(const Polygon& other) const
 {
+	//std::vector<PolygonIntersection> intersections;
 	std::vector<Point2D> intersections;
 
 	int countA = Vertices.size();  // The number of Polygon A vertices
@@ -190,6 +204,15 @@ std::vector<Point2D> Polygon::FindIntersections(const Polygon& other) const
 			if (edgeA.Intersects(edgeB))
 			{
 				Point2D intersectionPoint = edgeA.IntersectionPoint(edgeB);
+
+				/*PolygonIntersection polygonIntersection;
+				polygonIntersection.Point = intersectionPoint;*/
+				/*polygonIntersection.EdgeIndexA = i;
+				polygonIntersection.EdgeIndexB = j;*/
+			/*	polygonIntersection.tA = 
+				polygonIntersection.tB = */
+
+				//intersections.push_back(polygonIntersection);
 				intersections.push_back(intersectionPoint);
 			}
 		}
