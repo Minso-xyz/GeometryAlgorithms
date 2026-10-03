@@ -239,7 +239,7 @@ std::vector<Point2D> Polygon::FindOutsideVertices(const Polygon& other) const
 	return outsideVertices;
 }
 
-std::vector<Point2D> Polygon::BuildBoundaryWithIntersections(const std::vector<PolygonIntersection>& intersections) const
+std::vector<Point2D> Polygon::BuildBoundaryWithIntersections(const std::vector<PolygonIntersection>& intersections, PolygonSide side) const
 {
 	std::vector<Point2D> boundary;
 
@@ -253,17 +253,35 @@ std::vector<Point2D> Polygon::BuildBoundaryWithIntersections(const std::vector<P
 
 		for (const PolygonIntersection& intersection : intersections)
 		{
-			if (intersection.EdgeIndexA == i)
+			int edgeIndex;
+
+			if (side == PolygonSide::A)
+			{
+				edgeIndex = intersection.EdgeIndexA;
+			}
+			else   // PolygonSide::B
+			{
+				edgeIndex = intersection.EdgeIndexB;
+			}
+
+			if (edgeIndex == i)
 			{
 				intersectionsInEdge.push_back(intersection);
 			}
 		}
 
-		// arrange the intersection points in the order of tA [0-1]
+		// arrange the intersection points in the order of t [0-1]
 		std::sort(intersectionsInEdge.begin(), intersectionsInEdge.end(),
-			[](const PolygonIntersection & a, const PolygonIntersection & b)
+			[side](const PolygonIntersection & a, const PolygonIntersection & b)
 			{
-				return a.tA < b.tA;
+				if (side == PolygonSide::A)
+				{
+					return a.tA < b.tA;
+				}
+				else   // PolygonSide::B
+				{
+					return a.tB < b.tB;
+				}
 			});
 
 		// add the intersection points to boundary in order

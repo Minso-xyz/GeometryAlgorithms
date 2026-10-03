@@ -17,6 +17,12 @@ public:
 		double tA;
 		double tB;
 	};
+
+	enum class PolygonSide
+	{
+		A,B
+	};
+
 public:
 	std::vector<Point2D> Vertices;
 
@@ -32,5 +38,5 @@ public:
 	Polygon Clip(const Polygon& clipPolygon) const;
 	std::vector<PolygonIntersection> FindIntersections(const Polygon& other) const;
 	std::vector<Point2D> FindOutsideVertices(const Polygon& other) const;
-	std::vector<Point2D> BuildBoundaryWithIntersections(const std::vector<PolygonIntersection>& intersections) const;
+	std::vector<Point2D> BuildBoundaryWithIntersections(const std::vector<PolygonIntersection>& intersections, PolygonSide side) const;
 };
