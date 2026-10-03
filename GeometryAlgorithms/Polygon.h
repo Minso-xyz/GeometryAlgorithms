@@ -32,5 +32,5 @@ public:
 	Polygon Clip(const Polygon& clipPolygon) const;
 	std::vector<PolygonIntersection> FindIntersections(const Polygon& other) const;
 	std::vector<Point2D> FindOutsideVertices(const Polygon& other) const;
-	
+	std::vector<Point2D> BuildBoundaryWithIntersections(const std::vector<PolygonIntersection>& intersections) const;
 };

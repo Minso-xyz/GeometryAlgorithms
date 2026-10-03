@@ -1,5 +1,6 @@
 ﻿#include "Polygon.h"
 #include "Segment2D.h"
+#include <algorithm>
 
 const double epsilon = 1e-9;
 
@@ -238,3 +239,39 @@ std::vector<Point2D> Polygon::FindOutsideVertices(const Polygon& other) const
 	return outsideVertices;
 }
 
+std::vector<Point2D> Polygon::BuildBoundaryWithIntersections(const std::vector<PolygonIntersection>& intersections) const
+{
+	std::vector<Point2D> boundary;
+
+	for (int i = 0; i < Vertices.size(); i++)
+	{
+		// add the current polygon vertex
+		boundary.push_back(Vertices[i]);
+
+		// find the intersections in the edge [i]
+		std::vector<PolygonIntersection> intersectionsInEdge;
+
+		for (const PolygonIntersection& intersection : intersections)
+		{
+			if (intersection.EdgeIndexA == i)
+			{
+				intersectionsInEdge.push_back(intersection);
+			}
+		}
+
+		// arrange the intersection points in the order of tA [0-1]
+		std::sort(intersectionsInEdge.begin(), intersectionsInEdge.end(),
+			[](const PolygonIntersection & a, const PolygonIntersection & b)
+			{
+				return a.tA < b.tA;
+			});
+
+		// add the intersection points to boundary in order
+		for (const PolygonIntersection& intersection : intersectionsInEdge)
+		{
+			boundary.push_back(intersection.Point);
+		}
+	}
+
+	return boundary;
+}
