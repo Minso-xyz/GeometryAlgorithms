@@ -293,3 +293,29 @@ std::vector<Point2D> Polygon::BuildBoundaryWithIntersections(const std::vector<P
 
 	return boundary;
 }
+
+std::vector<Segment2D> Polygon::FindOutsideBoundarySegments(const std::vector<Point2D>& boundary, const Polygon& other) const
+{
+	std::vector<Segment2D> outsideSegments;
+
+	int count = boundary.size();
+
+	for (int i = 0; i < count; i++)
+	{
+		int next = (i + 1) % count;
+
+		Point2D start = boundary[i];
+		Point2D end = boundary[next];
+
+		Point2D midPoint((start.X + end.X) / 2.0, (start.Y + end.Y) / 2.0);
+
+		bool insideOther = other.ContainsPoint(midPoint);   
+
+		// if midPoint (on the Edge of Polygon A) is outside from the other polygon (Polygon B)
+		if (!insideOther)
+		{
+			outsideSegments.push_back(Segment2D(start, end));
+		}
+	}
+	return outsideSegments;
+}
