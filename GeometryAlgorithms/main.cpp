@@ -70,6 +70,15 @@ int main()
 	std::vector<Point2D> outsideVertices1 = subjectPolygon.FindOutsideVertices(clipPolygon);
 	std::vector<Point2D> outsideVertices2 = clipPolygon.FindOutsideVertices(subjectPolygon);
 
+	// boundaries with intersections
+	std::vector<Point2D> boundaryA = subjectPolygon.BuildBoundaryWithIntersections(intersections, Polygon::PolygonSide::A);
+	std::vector<Point2D> boundaryB = clipPolygon.BuildBoundaryWithIntersections(intersections, Polygon::PolygonSide::B);
+
+	// outside boundary segments
+	std::vector<Segment2D> segmentsA = subjectPolygon.FindOutsideBoundarySegments(boundaryA, clipPolygon);
+	std::vector<Segment2D> segmentsB = clipPolygon.FindOutsideBoundarySegments(boundaryB, subjectPolygon);
+	
+
 	Renderer renderer;
 	Camera camera;
 	gCamera = &camera;
@@ -111,25 +120,35 @@ int main()
 		//renderer.DrawPolygon(square);   // Draw square
 		renderer.DrawPolygon(subjectPolygon, 0.2f, 1.0f, 0.0f, 1.0f);   // Draw subjectPolygon
 		renderer.DrawPolygon(clipPolygon, 0.2f, 0.0f, 0.0f, 1.0f);   // Draw clipPolygon
-		renderer.DrawPolygon(clipped, 5.0f, 1.0f, 1.0f, 1.0f);   // Draw clippedPolygon
+		//renderer.DrawPolygon(clipped, 5.0f, 1.0f, 1.0f, 1.0f);   // Draw clippedPolygon
 
-		// Draw intersection points
-		for (const Polygon::PolygonIntersection& intersection : intersections)
-		{
-			Point3D pointToRender3D = Point3D(intersection.Point.X, intersection.Point.Y, 0);
-			renderer.DrawPoint(pointToRender3D, 15.0f, 0.0f, 1.0f, 0.0f);
-		}
+		//// Draw intersection points
+		//for (const Polygon::PolygonIntersection& intersection : intersections)
+		//{
+		//	Point3D pointToRender3D = Point3D(intersection.Point.X, intersection.Point.Y, 0);
+		//	renderer.DrawPoint(pointToRender3D, 15.0f, 0.0f, 1.0f, 0.0f);
+		//}
 
 		// Draw outside vertices
 		for (const Point2D& point : outsideVertices1)
 		{
 			Point3D pointToRender = Point3D(point.X, point.Y, 0);
-			renderer.DrawPoint(pointToRender, 15.0f, 1.0f, 0.0f, 0.0f);
+			renderer.DrawPoint(pointToRender, 15.0f, 0.0f, 1.0f, 0.0f);
 		}
 		for (const Point2D& point : outsideVertices2)
 		{
 			Point3D pointToRender = Point3D(point.X, point.Y, 0);
-			renderer.DrawPoint(pointToRender, 15.0f, 1.0f, 0.0f, 0.0f);
+			renderer.DrawPoint(pointToRender, 15.0f, 0.0f, 1.0f, 0.0f);
+		}
+
+		// Draw outside segments (union)
+		for (int i = 0; i < segmentsA.size(); i++)   // segments A
+		{
+			renderer.DrawSegment(segmentsA[i], 5.0f, 1.0f, 1.0f, 1.0f);
+		}
+		for (int i = 0; i < segmentsB.size(); i++)   // segments B
+		{
+			renderer.DrawSegment(segmentsB[i], 5.0f, 1.0f, 1.0f, 1.0f);
 		}
 
 		//renderer.DrawSegment(segment);   // Draw segment
