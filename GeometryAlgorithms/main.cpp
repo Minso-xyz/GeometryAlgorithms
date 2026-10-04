@@ -151,6 +151,11 @@ int main()
 			renderer.DrawSegment(segmentsB[i], 5.0f, 1.0f, 1.0f, 1.0f);
 		}
 
+		// Create the union segments
+		std::vector<Segment2D> unionSegments;
+		unionSegments.insert(unionSegments.end(), segmentsA.begin(), segmentsA.end());
+		unionSegments.insert(unionSegments.end(), segmentsB.begin(), segmentsB.end());
+
 		//renderer.DrawSegment(segment);   // Draw segment
 
 		glfwSwapBuffers(window);

@@ -319,3 +319,8 @@ std::vector<Segment2D> Polygon::FindOutsideBoundarySegments(const std::vector<Po
 	}
 	return outsideSegments;
 }
+
+Polygon Polygon::BuildPolygonFromSegments(const std::vector<Segment2D> segments) const
+{
+	
+}
