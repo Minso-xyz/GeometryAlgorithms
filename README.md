@@ -54,7 +54,7 @@ Convex polygon clipping using the Sutherland-Hodgman algorithm.
 Blue and magenta: input polygons / White: Clipped Polygon / Green: Intersection Points
 
  
-## Boolean Operation
+## Boolean Operations
 | Union (OR) | Intersection (AND) | Substraction / Difference (NOT) | Exclusion (XOR) |
 |------------|------------|------------|------------|
 | ![GeometryAlgorithms](Boolean_Union.png) |  |   |   |
