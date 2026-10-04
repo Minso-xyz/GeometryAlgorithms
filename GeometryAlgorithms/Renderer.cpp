@@ -188,5 +188,5 @@ void Renderer::DrawCoordinateAxis()
 
 void Renderer:: DrawSegment(const Segment2D& segment, float width, float red, float green, float blue)
 {
-	DrawLine2D(segment.Start, segment.End, 0.2f, 1.0f, 1.0f, 1.0f);
+	DrawLine2D(segment.Start, segment.End, width, red, green, blue);
 }
