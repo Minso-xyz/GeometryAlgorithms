@@ -1,8 +1,7 @@
 # Geometry Algorithms
 An interactive C++ and OpenGL playground for implementing fundamental
 computational geometry and mesh processing algorithms from scratch.
- 
-The project explores geometry operations commonly encountered in
+ The project explores geometry operations commonly encountered in
 CAD, geometry processing, and computational geometry systems.
  
 ## Current Features
@@ -54,6 +53,11 @@ Convex polygon clipping using the Sutherland-Hodgman algorithm.
 
 Blue and magenta: input polygons / White: Clipped Polygon / Green: Intersection Points
 
+ 
+## Boolean Operations
+| Union (A ∪ B, OR) | Intersection (A ∩ B, AND) | Substraction / Difference (A - B / B - A, NOT) | Exclusion (XOR) |
+|------------|------------|------------|------------|
+| ![GeometryAlgorithms](Boolean_Union.png) |  |   |   |
 
  
 ## Roadmap
@@ -64,8 +68,8 @@ Blue and magenta: input polygons / White: Clipped Polygon / Green: Intersection 
 - [x] Line Segment Intersection
 - [x] Line Segment Intersection Point Calculation
 - [x] Convex Polygon Clipping (Sutherland-Hodgman)
-- [ ] Polygon Triangulation
 - [ ] Polygon Boolean Operations
+- [ ] Polygon Triangulation
 - [ ] Polygon Offset
 - [ ] SVG Export
  
