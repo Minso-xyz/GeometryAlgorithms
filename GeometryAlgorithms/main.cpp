@@ -122,12 +122,12 @@ int main()
 		renderer.DrawPolygon(clipPolygon, 0.2f, 0.0f, 0.0f, 1.0f);   // Draw clipPolygon
 		//renderer.DrawPolygon(clipped, 5.0f, 1.0f, 1.0f, 1.0f);   // Draw clippedPolygon
 
-		//// Draw intersection points
-		//for (const Polygon::PolygonIntersection& intersection : intersections)
-		//{
-		//	Point3D pointToRender3D = Point3D(intersection.Point.X, intersection.Point.Y, 0);
-		//	renderer.DrawPoint(pointToRender3D, 15.0f, 0.0f, 1.0f, 0.0f);
-		//}
+		// Draw intersection points
+		for (const Polygon::PolygonIntersection& intersection : intersections)
+		{
+			Point3D pointToRender3D = Point3D(intersection.Point.X, intersection.Point.Y, 0);
+			renderer.DrawPoint(pointToRender3D, 15.0f, 0.0f, 1.0f, 0.0f);
+		}
 
 		// Draw outside vertices
 		for (const Point2D& point : outsideVertices1)
