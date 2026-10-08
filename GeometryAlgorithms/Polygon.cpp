@@ -322,5 +322,65 @@ std::vector<Segment2D> Polygon::FindOutsideBoundarySegments(const std::vector<Po
 
 Polygon Polygon::BuildPolygonFromSegments(const std::vector<Segment2D> segments) const
 {
+	Polygon result;
+
+	if (segments.empty())
+	{
+		return result;
+	}
+
+	// mark the segment as checked
+	std::vector<bool> checked(segments.size(), false);
 	
+	Point2D startPoint = segments[0].Start;
+	Point2D currentPoint = segments[0].End;
+
+	result.Vertices.push_back(startPoint);
+	result.Vertices.push_back(currentPoint);
+
+	checked[0] = true;
+
+	while (!currentPoint.IsEqual(startPoint, 1e-9))  // loop continues when the currentPoint is back to the startPoint
+	{
+		bool foundNext = false;
+
+		for (int i = 0; i < segments.size(); i++)
+		{
+			if (checked[i])
+			{
+				continue;  // if the segment is already checked before, skip this one
+			}
+
+			if (segments[i].Start.IsEqual(currentPoint, 1e-9))
+			{
+				currentPoint = segments[i].End;
+			}
+
+			if (segments[i].End.IsEqual(currentPoint, 1e-9))   // in case of the segment is connected but in other direction
+			{
+				currentPoint = segments[i].Start;
+			}
+
+			else
+			{
+				continue;  // if the segment is not connected either to StartPoint of EndPoint, move on to next one
+			}
+
+			// In case the connected point found
+			checked[i] = true;
+			foundNext = true;
+
+			// the startPoint is already in Vertices[0]
+			if (!currentPoint.IsEqual(startPoint, 1e-9))
+			{
+				result.Vertices.push_back(currentPoint);   // add a new point to Polygon vertices
+			}
+			break;
+		}
+		if (!foundNext)
+		{
+			break;   // not able to created a closed loop
+		}
+	}
+	return result;
 }
