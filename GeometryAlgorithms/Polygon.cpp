@@ -355,12 +355,6 @@ Polygon Polygon::BuildPolygonFromSegments(const std::vector<Segment2D> segments)
 			{
 				currentPoint = segments[i].End;
 			}
-
-			if (segments[i].End.IsEqual(currentPoint, 1e-9))   // in case of the segment is connected but in other direction
-			{
-				currentPoint = segments[i].Start;
-			}
-
 			else
 			{
 				continue;  // if the segment is not connected either to StartPoint of EndPoint, move on to next one

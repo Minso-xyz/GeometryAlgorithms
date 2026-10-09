@@ -77,8 +77,15 @@ int main()
 	// outside boundary segments
 	std::vector<Segment2D> segmentsA = subjectPolygon.FindOutsideBoundarySegments(boundaryA, clipPolygon);
 	std::vector<Segment2D> segmentsB = clipPolygon.FindOutsideBoundarySegments(boundaryB, subjectPolygon);
-	
 
+	// unite segmentsA and segmentsB
+	std::vector<Segment2D> unionSegments;
+
+	unionSegments.insert(unionSegments.end(), segmentsA.begin(), segmentsA.end());
+	unionSegments.insert(unionSegments.end(), segmentsB.begin(), segmentsB.end());
+
+	Polygon polygonUnion = subjectPolygon.BuildPolygonFromSegments(unionSegments);
+	
 	Renderer renderer;
 	Camera camera;
 	gCamera = &camera;
@@ -141,20 +148,18 @@ int main()
 			renderer.DrawPoint(pointToRender, 15.0f, 0.0f, 1.0f, 0.0f);
 		}
 
-		// Draw outside segments (union)
-		for (int i = 0; i < segmentsA.size(); i++)   // segments A
-		{
-			renderer.DrawSegment(segmentsA[i], 5.0f, 1.0f, 1.0f, 1.0f);
-		}
-		for (int i = 0; i < segmentsB.size(); i++)   // segments B
-		{
-			renderer.DrawSegment(segmentsB[i], 5.0f, 1.0f, 1.0f, 1.0f);
-		}
+		//// Draw outside segments (union)
+		//for (int i = 0; i < segmentsA.size(); i++)   // segments A
+		//{
+		//	renderer.DrawSegment(segmentsA[i], 5.0f, 1.0f, 1.0f, 1.0f);
+		//}
+		//for (int i = 0; i < segmentsB.size(); i++)   // segments B
+		//{
+		//	renderer.DrawSegment(segmentsB[i], 5.0f, 1.0f, 1.0f, 1.0f);
+		//}
 
-		// Create the union segments
-		std::vector<Segment2D> unionSegments;
-		unionSegments.insert(unionSegments.end(), segmentsA.begin(), segmentsA.end());
-		unionSegments.insert(unionSegments.end(), segmentsB.begin(), segmentsB.end());
+		// Draw PolygonUnion
+		renderer.DrawPolygon(polygonUnion, 5.0f, 1.0f, 1.0f, 1.0f);
 
 		//renderer.DrawSegment(segment);   // Draw segment
 
