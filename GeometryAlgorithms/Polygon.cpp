@@ -394,30 +394,28 @@ std::vector<Polygon> Polygon::BuildPolygonFromSegments(const std::vector<Segment
 		bool closedLoop = false;
 
 		// create a closed-loop
-		while (!currentPoint.IsEqual(startPoint, 1e-9))  // loop continues when the currentPoint is back to the startPoint
+		while (true)
 		{
+			if (currentPoint.IsEqual(startPoint, 1e-9))    // when the currentPoint is back to the startPoint, the loop is closed
+			{
+				closedLoop = true;
+				break;
+			}
 
 			bool foundNext = false;
 
-			if (checked[segments.size() - 1] == false)  // keep finding the remaining polygons if there is any unchecked point
+
+			for (int i = 0; i < segments.size(); i++)
 			{
-				for (int i = 0; i < segments.size(); i++)
+				if (checked[i])
 				{
-					if (checked[i])
-					{
-						continue;  // if the segment is already checked before, skip this one
-					}
+					continue;  // if the segment is already checked before, skip this one
+				}
 
-					if (segments[i].Start.IsEqual(currentPoint, 1e-9))
-					{
-						currentPoint = segments[i].End;
-					}
-					else
-					{
-						continue;  // if the segment is not connected either to StartPoint of EndPoint, move on to next one
-					}
+				if (segments[i].Start.IsEqual(currentPoint, 1e-9))
+				{
+					currentPoint = segments[i].End;
 
-					// In case the connected point found
 					checked[i] = true;
 					foundNext = true;
 
@@ -428,19 +426,12 @@ std::vector<Polygon> Polygon::BuildPolygonFromSegments(const std::vector<Segment
 					}
 					break;
 				}
-				if (!foundNext)
-				{
-					break;   // not able to created a closed loop
-				}
+			}
+			if (!foundNext)
+			{
+				break;   // not able to created a closed loop
 			}
 		}
-
-		// if it returned to the startPoint, closed loop is completed
-		if (currentPoint.IsEqual(startPoint, 1e-9))
-		{
-			closedLoop = true;
-		}
-
 		// add it to result
 		if (closedLoop && currentPolygon.Vertices.size() >= 3)
 		{
