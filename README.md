@@ -55,9 +55,9 @@ Blue and magenta: input polygons / White: Clipped Polygon / Green: Intersection 
 
  
 ## Boolean Operations
-| Union (A ∪ B, OR) | Intersection (A ∩ B, AND) | Substraction / Difference (A - B, NOT) | Exclusion (XOR) |
-|------------|------------|------------|------------|
-| ![GeometryAlgorithms](Boolean_Union.png) |  ![GeometryAlgorithms](ClippingPolygons.png) | ![GeometryAlgorithms](Boolean_Subtraction_A-B.png) |   |
+| Union (A ∪ B, OR) | Intersection (A ∩ B, AND) | Substraction / Difference (A - B, NOT) |  Substraction / Difference (B - A, NOT) | Exclusion (XOR) |
+|------------|------------|------------|------------|------------|
+| ![GeometryAlgorithms](Boolean_Union.png) |  ![GeometryAlgorithms](ClippingPolygons.png) | ![GeometryAlgorithms](Boolean_Subtraction_A-B.png) | ![GeometryAlgorithms](Boolean_Subtraction_B-A.png) |   |
 
  
 ## Roadmap
