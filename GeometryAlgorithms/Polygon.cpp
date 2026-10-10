@@ -4,6 +4,7 @@
 
 const double epsilon = 1e-9;
 
+
 Point2D Polygon::GetMinPoint() const
 {
 	double minX = Vertices[0].X;
@@ -320,9 +321,36 @@ std::vector<Segment2D> Polygon::FindOutsideBoundarySegments(const std::vector<Po
 	return outsideSegments;
 }
 
-Polygon Polygon::BuildPolygonFromSegments(const std::vector<Segment2D> segments) const
+std::vector<Segment2D> Polygon::FindInsideBoundarySegments(const std::vector<Point2D>& boundary, const Polygon& other) const
 {
-	Polygon result;
+	std::vector<Segment2D> insdeSegments;
+
+	int count = boundary.size();
+
+	for (int i = 0; i < count; i++)
+	{
+		int next = (i + 1) % count;
+
+		Point2D start = boundary[i];
+		Point2D end = boundary[next];
+
+		Point2D midPoint((start.X + end.X) / 2.0, (start.Y + end.Y) / 2.0);
+
+		bool insideOther = other.ContainsPoint(midPoint);
+
+		// if midPoint (on the Edge of Polygon A) is outside from the other polygon (Polygon B)
+		if (insideOther)
+		{
+			insdeSegments.push_back(Segment2D(start, end));
+		}
+	}
+	return insdeSegments;
+}
+
+std::vector<Polygon> Polygon::BuildPolygonFromSegments(const std::vector<Segment2D>& segments)
+{
+	std::vector<Polygon> result;
+	Polygon currentPolygon;
 
 	if (segments.empty())
 	{
@@ -331,49 +359,92 @@ Polygon Polygon::BuildPolygonFromSegments(const std::vector<Segment2D> segments)
 
 	// mark the segment as checked
 	std::vector<bool> checked(segments.size(), false);
-	
-	Point2D startPoint = segments[0].Start;
-	Point2D currentPoint = segments[0].End;
 
-	result.Vertices.push_back(startPoint);
-	result.Vertices.push_back(currentPoint);
 
-	checked[0] = true;
-
-	while (!currentPoint.IsEqual(startPoint, 1e-9))  // loop continues when the currentPoint is back to the startPoint
+	while (true)
 	{
-		bool foundNext = false;
-
+		// find an unchecked segment
+		int firstUncheckedIndex = -1;
+		
 		for (int i = 0; i < segments.size(); i++)
 		{
-			if (checked[i])
+			if (!checked[i])
 			{
-				continue;  // if the segment is already checked before, skip this one
+				firstUncheckedIndex = i;
+				break;
 			}
+		}
 
-			if (segments[i].Start.IsEqual(currentPoint, 1e-9))
-			{
-				currentPoint = segments[i].End;
-			}
-			else
-			{
-				continue;  // if the segment is not connected either to StartPoint of EndPoint, move on to next one
-			}
-
-			// In case the connected point found
-			checked[i] = true;
-			foundNext = true;
-
-			// the startPoint is already in Vertices[0]
-			if (!currentPoint.IsEqual(startPoint, 1e-9))
-			{
-				result.Vertices.push_back(currentPoint);   // add a new point to Polygon vertices
-			}
+		// if there is no unchecked segments, polygon is completed
+		if (firstUncheckedIndex == -1)
+		{
 			break;
 		}
-		if (!foundNext)
+
+		// start a new Polygon loop
+		Polygon currentPolygon;
+		Point2D startPoint = segments[firstUncheckedIndex].Start;
+		Point2D currentPoint = segments[firstUncheckedIndex].End;
+
+		currentPolygon.Vertices.push_back(startPoint);
+		currentPolygon.Vertices.push_back(currentPoint);
+
+		checked[firstUncheckedIndex] = true;
+
+		bool closedLoop = false;
+
+		// create a closed-loop
+		while (!currentPoint.IsEqual(startPoint, 1e-9))  // loop continues when the currentPoint is back to the startPoint
 		{
-			break;   // not able to created a closed loop
+
+			bool foundNext = false;
+
+			if (checked[segments.size() - 1] == false)  // keep finding the remaining polygons if there is any unchecked point
+			{
+				for (int i = 0; i < segments.size(); i++)
+				{
+					if (checked[i])
+					{
+						continue;  // if the segment is already checked before, skip this one
+					}
+
+					if (segments[i].Start.IsEqual(currentPoint, 1e-9))
+					{
+						currentPoint = segments[i].End;
+					}
+					else
+					{
+						continue;  // if the segment is not connected either to StartPoint of EndPoint, move on to next one
+					}
+
+					// In case the connected point found
+					checked[i] = true;
+					foundNext = true;
+
+					// the startPoint is already in Vertices[0]
+					if (!currentPoint.IsEqual(startPoint, 1e-9))
+					{
+						currentPolygon.Vertices.push_back(currentPoint);   // add a new point to Polygon vertices
+					}
+					break;
+				}
+				if (!foundNext)
+				{
+					break;   // not able to created a closed loop
+				}
+			}
+		}
+
+		// if it returned to the startPoint, closed loop is completed
+		if (currentPoint.IsEqual(startPoint, 1e-9))
+		{
+			closedLoop = true;
+		}
+
+		// add it to result
+		if (closedLoop && currentPolygon.Vertices.size() >= 3)
+		{
+			result.push_back(currentPolygon);
 		}
 	}
 	return result;

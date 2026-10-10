@@ -74,17 +74,32 @@ int main()
 	std::vector<Point2D> boundaryA = subjectPolygon.BuildBoundaryWithIntersections(intersections, Polygon::PolygonSide::A);
 	std::vector<Point2D> boundaryB = clipPolygon.BuildBoundaryWithIntersections(intersections, Polygon::PolygonSide::B);
 
-	// outside boundary segments
-	std::vector<Segment2D> segmentsA = subjectPolygon.FindOutsideBoundarySegments(boundaryA, clipPolygon);
-	std::vector<Segment2D> segmentsB = clipPolygon.FindOutsideBoundarySegments(boundaryB, subjectPolygon);
+	//// outside boundary segments
+	//std::vector<Segment2D> segmentsA = subjectPolygon.FindOutsideBoundarySegments(boundaryA, clipPolygon);
+	//std::vector<Segment2D> segmentsB = clipPolygon.FindOutsideBoundarySegments(boundaryB, subjectPolygon);
 
-	// unite segmentsA and segmentsB
-	std::vector<Segment2D> unionSegments;
+	//// unite segmentsA and segmentsB
+	//std::vector<Segment2D> unionSegments;
 
-	unionSegments.insert(unionSegments.end(), segmentsA.begin(), segmentsA.end());
-	unionSegments.insert(unionSegments.end(), segmentsB.begin(), segmentsB.end());
+	//unionSegments.insert(unionSegments.end(), segmentsA.begin(), segmentsA.end());
+	//unionSegments.insert(unionSegments.end(), segmentsB.begin(), segmentsB.end());
 
-	Polygon polygonUnion = subjectPolygon.BuildPolygonFromSegments(unionSegments);
+	//Polygon polygonUnion = subjectPolygon.BuildPolygonFromSegments(unionSegments);
+
+	// Substract segmentsA to segmentsB
+	std::vector<Segment2D> differenceSegments;
+
+	std::vector<Segment2D> outsideA = subjectPolygon.FindOutsideBoundarySegments(boundaryA, clipPolygon);
+	std::vector<Segment2D> insideB = clipPolygon.FindInsideBoundarySegments(boundaryB, subjectPolygon);
+
+	differenceSegments.insert(differenceSegments.end(), outsideA.begin(), outsideA.end());
+	
+	for (const Segment2D& segment : insideB)
+	{
+		differenceSegments.push_back(Segment2D(segment.End, segment.Start));
+	}
+
+	std::vector<Polygon> polygonDifference = Polygon::BuildPolygonFromSegments(differenceSegments);
 	
 	Renderer renderer;
 	Camera camera;
@@ -158,8 +173,15 @@ int main()
 		//	renderer.DrawSegment(segmentsB[i], 5.0f, 1.0f, 1.0f, 1.0f);
 		//}
 
-		// Draw PolygonUnion
-		renderer.DrawPolygon(polygonUnion, 5.0f, 1.0f, 1.0f, 1.0f);
+		//// Draw Polygon - Union
+		//renderer.DrawPolygon(polygonUnion, 5.0f, 1.0f, 1.0f, 1.0f);
+
+		// Draw Polygon - Difference
+		for (auto polygon : polygonDifference)
+		{
+			renderer.DrawPolygon(polygon, 5.0f, 1.0f, 1.0f, 1.0f);
+		}
+		
 
 		//renderer.DrawSegment(segment);   // Draw segment
 
