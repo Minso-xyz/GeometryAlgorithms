@@ -87,20 +87,36 @@ int main()
 	//Polygon polygonUnion = subjectPolygon.BuildPolygonFromSegments(unionSegments);
 
 	// Substract segmentsA to segmentsB
-	std::vector<Segment2D> differenceSegments;
+	std::vector<Segment2D> differenceSegments;   // A-B
+	std::vector<Segment2D> differenceSegments2;   // B-A
 
+	std::vector<Segment2D> insideA = Polygon::FindInsideBoundarySegments(boundaryA, clipPolygon);
 	std::vector<Segment2D> outsideA = Polygon::FindOutsideBoundarySegments(boundaryA, clipPolygon);
 	std::vector<Segment2D> insideB = Polygon::FindInsideBoundarySegments(boundaryB, subjectPolygon);
+	std::vector<Segment2D> outsideB = Polygon::FindOutsideBoundarySegments(boundaryB, subjectPolygon);
 
+	// A-B
 	differenceSegments.insert(differenceSegments.end(), outsideA.begin(), outsideA.end());
-	
+
 	for (const Segment2D& segment : insideB)
 	{
 		differenceSegments.push_back(Segment2D(segment.End, segment.Start));
 	}
 
 	std::vector<Polygon> polygonDifference = Polygon::BuildPolygonFromSegments(differenceSegments);
+
+
+	// B-A
+	differenceSegments2.insert(differenceSegments2.end(), outsideB.begin(), outsideB.end());
+
+	for (const Segment2D& segment : insideA)
+	{
+		differenceSegments2.push_back(Segment2D(segment.End, segment.Start));
+	}
 	
+	std::vector<Polygon> polygonDifference2 = Polygon::BuildPolygonFromSegments(differenceSegments2);
+
+
 	Renderer renderer;
 	Camera camera;
 	gCamera = &camera;
@@ -176,8 +192,14 @@ int main()
 		//// Draw Polygon - Union
 		//renderer.DrawPolygon(polygonUnion, 5.0f, 1.0f, 1.0f, 1.0f);
 
-		// Draw Polygon - Difference
-		for (auto polygon : polygonDifference)
+		//// Draw Polygon - Difference / A-B
+		//for (auto polygon : polygonDifference)
+		//{
+		//	renderer.DrawPolygon(polygon, 5.0f, 1.0f, 1.0f, 1.0f);
+		//}
+
+		// Draw Polygon - Difference / B-A
+		for (auto polygon : polygonDifference2)
 		{
 			renderer.DrawPolygon(polygon, 5.0f, 1.0f, 1.0f, 1.0f);
 		}
