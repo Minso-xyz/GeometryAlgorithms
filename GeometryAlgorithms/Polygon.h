@@ -39,7 +39,7 @@ public:
 	std::vector<PolygonIntersection> FindIntersections(const Polygon& other) const;
 	std::vector<Point2D> FindOutsideVertices(const Polygon& other) const;
 	std::vector<Point2D> BuildBoundaryWithIntersections(const std::vector<PolygonIntersection>& intersections, PolygonSide side) const;
-	std::vector<Segment2D> FindOutsideBoundarySegments(const std::vector<Point2D>& boundary, const Polygon& other) const;
+	static std::vector<Segment2D> FindOutsideBoundarySegments(const std::vector<Point2D>& boundary, const Polygon& other);
 	static std::vector<Polygon> BuildPolygonFromSegments(const std::vector<Segment2D>& segments);
-	std::vector<Segment2D> FindInsideBoundarySegments(const std::vector<Point2D>& boundary, const Polygon& other) const;
+	static std::vector<Segment2D> FindInsideBoundarySegments(const std::vector<Point2D>& boundary, const Polygon& other);
 };

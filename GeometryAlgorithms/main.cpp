@@ -89,8 +89,8 @@ int main()
 	// Substract segmentsA to segmentsB
 	std::vector<Segment2D> differenceSegments;
 
-	std::vector<Segment2D> outsideA = subjectPolygon.FindOutsideBoundarySegments(boundaryA, clipPolygon);
-	std::vector<Segment2D> insideB = clipPolygon.FindInsideBoundarySegments(boundaryB, subjectPolygon);
+	std::vector<Segment2D> outsideA = Polygon::FindOutsideBoundarySegments(boundaryA, clipPolygon);
+	std::vector<Segment2D> insideB = Polygon::FindInsideBoundarySegments(boundaryB, subjectPolygon);
 
 	differenceSegments.insert(differenceSegments.end(), outsideA.begin(), outsideA.end());
 	

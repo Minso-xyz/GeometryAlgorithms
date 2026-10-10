@@ -295,7 +295,7 @@ std::vector<Point2D> Polygon::BuildBoundaryWithIntersections(const std::vector<P
 	return boundary;
 }
 
-std::vector<Segment2D> Polygon::FindOutsideBoundarySegments(const std::vector<Point2D>& boundary, const Polygon& other) const
+std::vector<Segment2D> Polygon::FindOutsideBoundarySegments(const std::vector<Point2D>& boundary, const Polygon& other)
 {
 	std::vector<Segment2D> outsideSegments;
 
@@ -321,7 +321,7 @@ std::vector<Segment2D> Polygon::FindOutsideBoundarySegments(const std::vector<Po
 	return outsideSegments;
 }
 
-std::vector<Segment2D> Polygon::FindInsideBoundarySegments(const std::vector<Point2D>& boundary, const Polygon& other) const
+std::vector<Segment2D> Polygon::FindInsideBoundarySegments(const std::vector<Point2D>& boundary, const Polygon& other)
 {
 	std::vector<Segment2D> insdeSegments;
 
