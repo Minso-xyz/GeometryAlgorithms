@@ -26,6 +26,7 @@ CAD, geometry processing, and computational geometry systems.
 - Line Segment Intersection Test
 - Line Segment Intersection Point Calculation
 - Convex Polygon Clipping (Sutherland-Hodgman)
+- Boolean Operations (Union, Intersection, Difference/Substraction)
 
  
 ## OBJ Mesh Rendering
@@ -55,9 +56,9 @@ Blue and magenta: input polygons / White: Clipped Polygon / Green: Intersection 
 
  
 ## Boolean Operations
-| Union (A ∪ B, OR) | Intersection (A ∩ B, AND) | Substraction / Difference (A - B, NOT) |  Substraction / Difference (B - A, NOT) | Exclusion (XOR) |
-|------------|------------|------------|------------|------------|
-| ![GeometryAlgorithms](Boolean_Union.png) |  ![GeometryAlgorithms](ClippingPolygons.png) | ![GeometryAlgorithms](Boolean_Subtraction_A-B.png) | ![GeometryAlgorithms](Boolean_Subtraction_B-A.png) |   |
+| Union (A ∪ B, OR) | Intersection (A ∩ B, AND) | Substraction / Difference    (A - B, NOT) |  Substraction / Difference    (B - A, NOT) |
+|------------|------------|------------|------------|
+| ![GeometryAlgorithms](Boolean_Union.png) |  ![GeometryAlgorithms](ClippingPolygons.png) | ![GeometryAlgorithms](Boolean_Subtraction_A-B.png) | ![GeometryAlgorithms](Boolean_Subtraction_B-A.png) |
 
  
 ## Roadmap
@@ -68,9 +69,9 @@ Blue and magenta: input polygons / White: Clipped Polygon / Green: Intersection 
 - [x] Line Segment Intersection
 - [x] Line Segment Intersection Point Calculation
 - [x] Convex Polygon Clipping (Sutherland-Hodgman)
-- [ ] Polygon Boolean Operations
-- [ ] Polygon Triangulation
+- [x] Polygon Boolean Operations
 - [ ] Polygon Offset
+- [ ] Polygon Triangulation
 - [ ] SVG Export
  
 ### Mesh Processing
