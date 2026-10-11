@@ -88,3 +88,22 @@ Point2D Segment2D::IntersectionPoint(const Segment2D& other)
 	return p;
 }
 
+Segment2D Segment2D::Offset(double distance) const
+{
+	Vector2D direction = Vector2D(End.X - Start.X, End.Y - Start.Y);
+	Vector2D normalizedDirection = direction.Normalize();
+	Vector2D normal = normalizedDirection.Normal();
+
+	Vector2D normalFactored = normal * distance;
+
+	Point2D startOffset = Point2D(
+		Start.X + normalFactored.X, 
+		Start.Y + normalFactored.Y);
+
+	Point2D endOffset = Point2D(
+		End.X + normalFactored.X, 
+		End.Y + normalFactored.Y);
+
+	return Segment2D(startOffset, endOffset);
+}
+

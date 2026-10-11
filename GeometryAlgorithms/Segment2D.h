@@ -23,4 +23,5 @@ public:
 	bool Intersects(const Segment2D& other) const;
 	bool IsPointOnSegment(const Point2D& point) const;
 	Point2D IntersectionPoint(const Segment2D& other);
+	Segment2D Offset(double distance) const;
 };
