@@ -198,14 +198,24 @@ int main()
 		//	renderer.DrawPolygon(polygon, 5.0f, 1.0f, 1.0f, 1.0f);
 		//}
 
-		// Draw Polygon - Difference / B-A
-		for (auto polygon : polygonDifference2)
-		{
-			renderer.DrawPolygon(polygon, 5.0f, 1.0f, 1.0f, 1.0f);
-		}
+		//// Draw Polygon - Difference / B-A
+		//for (auto polygon : polygonDifference2)
+		//{
+		//	renderer.DrawPolygon(polygon, 5.0f, 1.0f, 1.0f, 1.0f);
+		//}
 		
 
-		//renderer.DrawSegment(segment);   // Draw segment
+		// Offset
+		Segment2D segment = Segment2D(Point2D(-6,-3), Point2D(6,3));
+		renderer.DrawSegment(segment, 3.0f, 1.0f, 1.0f, 1.0f);   // Draw segment
+
+		Segment2D offsetPositive = segment.Offset(2.5);
+		Segment2D offsetNegative = segment.Offset(-2.5);
+
+		renderer.DrawSegment(offsetPositive, 1.0f, 1.0f, 0.0f, 0.0f);
+		renderer.DrawSegment(offsetNegative, 1.0f, 0.0f, 0.0f, 1.0f);
+
+
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();   // handle the mouse/keyboard inputs
