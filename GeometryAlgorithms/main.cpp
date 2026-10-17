@@ -44,6 +44,7 @@ int main()
 	{0,10}
 	};*/
 
+	// For Boolean operations
 	Polygon subjectPolygon;
 	subjectPolygon.Vertices =
 	{
@@ -62,59 +63,77 @@ int main()
 	Point2D(-4.0, 5.0)
 	};
 
-	Polygon clipped = subjectPolygon.Clip(clipPolygon);
+	// For Offset
+	Segment2D segment1(
+		Point2D(-2.0, -6.0),
+		Point2D(7.0, -1.0)
+	);
+	Segment2D segment2(
+		Point2D(7.0, -1.0),
+		Point2D(3.0, 6.0)
+	);
+	Segment2D segment3(
+		Point2D(3.0, 6.0),
+		Point2D(-4.0, 5.0)
+	);
+	Segment2D segment4(
+		Point2D(-4.0, 5.0),
+		Point2D(-2.0, -6.0)
+	);
 
-	std::vector<Polygon::PolygonIntersection> intersections = subjectPolygon.FindIntersections(clipPolygon);  // Intersection points
+	//Polygon clipped = subjectPolygon.Clip(clipPolygon);
 
-	// outside vertices
-	std::vector<Point2D> outsideVertices1 = subjectPolygon.FindOutsideVertices(clipPolygon);
-	std::vector<Point2D> outsideVertices2 = clipPolygon.FindOutsideVertices(subjectPolygon);
+	//std::vector<Polygon::PolygonIntersection> intersections = subjectPolygon.FindIntersections(clipPolygon);  // Intersection points
 
-	// boundaries with intersections
-	std::vector<Point2D> boundaryA = subjectPolygon.BuildBoundaryWithIntersections(intersections, Polygon::PolygonSide::A);
-	std::vector<Point2D> boundaryB = clipPolygon.BuildBoundaryWithIntersections(intersections, Polygon::PolygonSide::B);
+	//// outside vertices
+	//std::vector<Point2D> outsideVertices1 = subjectPolygon.FindOutsideVertices(clipPolygon);
+	//std::vector<Point2D> outsideVertices2 = clipPolygon.FindOutsideVertices(subjectPolygon);
 
-	//// outside boundary segments
-	//std::vector<Segment2D> segmentsA = subjectPolygon.FindOutsideBoundarySegments(boundaryA, clipPolygon);
-	//std::vector<Segment2D> segmentsB = clipPolygon.FindOutsideBoundarySegments(boundaryB, subjectPolygon);
+	//// boundaries with intersections
+	//std::vector<Point2D> boundaryA = subjectPolygon.BuildBoundaryWithIntersections(intersections, Polygon::PolygonSide::A);
+	//std::vector<Point2D> boundaryB = clipPolygon.BuildBoundaryWithIntersections(intersections, Polygon::PolygonSide::B);
 
-	//// unite segmentsA and segmentsB
-	//std::vector<Segment2D> unionSegments;
+	////// outside boundary segments
+	////std::vector<Segment2D> segmentsA = subjectPolygon.FindOutsideBoundarySegments(boundaryA, clipPolygon);
+	////std::vector<Segment2D> segmentsB = clipPolygon.FindOutsideBoundarySegments(boundaryB, subjectPolygon);
 
-	//unionSegments.insert(unionSegments.end(), segmentsA.begin(), segmentsA.end());
-	//unionSegments.insert(unionSegments.end(), segmentsB.begin(), segmentsB.end());
+	////// unite segmentsA and segmentsB
+	////std::vector<Segment2D> unionSegments;
 
-	//Polygon polygonUnion = subjectPolygon.BuildPolygonFromSegments(unionSegments);
+	////unionSegments.insert(unionSegments.end(), segmentsA.begin(), segmentsA.end());
+	////unionSegments.insert(unionSegments.end(), segmentsB.begin(), segmentsB.end());
 
-	// Substract segmentsA to segmentsB
-	std::vector<Segment2D> differenceSegments;   // A-B
-	std::vector<Segment2D> differenceSegments2;   // B-A
+	////Polygon polygonUnion = subjectPolygon.BuildPolygonFromSegments(unionSegments);
 
-	std::vector<Segment2D> insideA = Polygon::FindInsideBoundarySegments(boundaryA, clipPolygon);
-	std::vector<Segment2D> outsideA = Polygon::FindOutsideBoundarySegments(boundaryA, clipPolygon);
-	std::vector<Segment2D> insideB = Polygon::FindInsideBoundarySegments(boundaryB, subjectPolygon);
-	std::vector<Segment2D> outsideB = Polygon::FindOutsideBoundarySegments(boundaryB, subjectPolygon);
+	//// Substract segmentsA to segmentsB
+	//std::vector<Segment2D> differenceSegments;   // A-B
+	//std::vector<Segment2D> differenceSegments2;   // B-A
 
-	// A-B
-	differenceSegments.insert(differenceSegments.end(), outsideA.begin(), outsideA.end());
+	//std::vector<Segment2D> insideA = Polygon::FindInsideBoundarySegments(boundaryA, clipPolygon);
+	//std::vector<Segment2D> outsideA = Polygon::FindOutsideBoundarySegments(boundaryA, clipPolygon);
+	//std::vector<Segment2D> insideB = Polygon::FindInsideBoundarySegments(boundaryB, subjectPolygon);
+	//std::vector<Segment2D> outsideB = Polygon::FindOutsideBoundarySegments(boundaryB, subjectPolygon);
 
-	for (const Segment2D& segment : insideB)
-	{
-		differenceSegments.push_back(Segment2D(segment.End, segment.Start));
-	}
+	//// A-B
+	//differenceSegments.insert(differenceSegments.end(), outsideA.begin(), outsideA.end());
 
-	std::vector<Polygon> polygonDifference = Polygon::BuildPolygonFromSegments(differenceSegments);
+	//for (const Segment2D& segment : insideB)
+	//{
+	//	differenceSegments.push_back(Segment2D(segment.End, segment.Start));
+	//}
+
+	//std::vector<Polygon> polygonDifference = Polygon::BuildPolygonFromSegments(differenceSegments);
 
 
-	// B-A
-	differenceSegments2.insert(differenceSegments2.end(), outsideB.begin(), outsideB.end());
+	//// B-A
+	//differenceSegments2.insert(differenceSegments2.end(), outsideB.begin(), outsideB.end());
 
-	for (const Segment2D& segment : insideA)
-	{
-		differenceSegments2.push_back(Segment2D(segment.End, segment.Start));
-	}
-	
-	std::vector<Polygon> polygonDifference2 = Polygon::BuildPolygonFromSegments(differenceSegments2);
+	//for (const Segment2D& segment : insideA)
+	//{
+	//	differenceSegments2.push_back(Segment2D(segment.End, segment.Start));
+	//}
+	//
+	//std::vector<Polygon> polygonDifference2 = Polygon::BuildPolygonFromSegments(differenceSegments2);
 
 
 	Renderer renderer;
@@ -155,29 +174,29 @@ int main()
 
 		//RenderBunny(renderer, objMesh);   // Render the bunny meshes
 
-		//renderer.DrawPolygon(square);   // Draw square
-		renderer.DrawPolygon(subjectPolygon, 0.2f, 1.0f, 0.0f, 1.0f);   // Draw subjectPolygon
-		renderer.DrawPolygon(clipPolygon, 0.2f, 0.0f, 0.0f, 1.0f);   // Draw clipPolygon
-		//renderer.DrawPolygon(clipped, 5.0f, 1.0f, 1.0f, 1.0f);   // Draw clippedPolygon
+		////renderer.DrawPolygon(square);   // Draw square
+		//renderer.DrawPolygon(subjectPolygon, 0.2f, 1.0f, 0.0f, 1.0f);   // Draw subjectPolygon
+		//renderer.DrawPolygon(clipPolygon, 0.2f, 0.0f, 0.0f, 1.0f);   // Draw clipPolygon
+		////renderer.DrawPolygon(clipped, 5.0f, 1.0f, 1.0f, 1.0f);   // Draw clippedPolygon
 
-		// Draw intersection points
-		for (const Polygon::PolygonIntersection& intersection : intersections)
-		{
-			Point3D pointToRender3D = Point3D(intersection.Point.X, intersection.Point.Y, 0);
-			renderer.DrawPoint(pointToRender3D, 15.0f, 0.0f, 1.0f, 0.0f);
-		}
+		//// Draw intersection points
+		//for (const Polygon::PolygonIntersection& intersection : intersections)
+		//{
+		//	Point3D pointToRender3D = Point3D(intersection.Point.X, intersection.Point.Y, 0);
+		//	renderer.DrawPoint(pointToRender3D, 15.0f, 0.0f, 1.0f, 0.0f);
+		//}
 
-		// Draw outside vertices
-		for (const Point2D& point : outsideVertices1)
-		{
-			Point3D pointToRender = Point3D(point.X, point.Y, 0);
-			renderer.DrawPoint(pointToRender, 15.0f, 0.0f, 1.0f, 0.0f);
-		}
-		for (const Point2D& point : outsideVertices2)
-		{
-			Point3D pointToRender = Point3D(point.X, point.Y, 0);
-			renderer.DrawPoint(pointToRender, 15.0f, 0.0f, 1.0f, 0.0f);
-		}
+		//// Draw outside vertices
+		//for (const Point2D& point : outsideVertices1)
+		//{
+		//	Point3D pointToRender = Point3D(point.X, point.Y, 0);
+		//	renderer.DrawPoint(pointToRender, 15.0f, 0.0f, 1.0f, 0.0f);
+		//}
+		//for (const Point2D& point : outsideVertices2)
+		//{
+		//	Point3D pointToRender = Point3D(point.X, point.Y, 0);
+		//	renderer.DrawPoint(pointToRender, 15.0f, 0.0f, 1.0f, 0.0f);
+		//}
 
 		//// Draw outside segments (union)
 		//for (int i = 0; i < segmentsA.size(); i++)   // segments A
@@ -205,16 +224,41 @@ int main()
 		//}
 		
 
-		// Offset
-		Segment2D segment = Segment2D(Point2D(-6,-3), Point2D(6,3));
-		renderer.DrawSegment(segment, 3.0f, 1.0f, 1.0f, 1.0f);   // Draw segment
+		//// Offset
+		//Segment2D segment = Segment2D(Point2D(-6,-3), Point2D(6,3));
+		//renderer.DrawSegment(segment, 3.0f, 1.0f, 1.0f, 1.0f);   // Draw segment
 
-		Segment2D offsetPositive = segment.Offset(2.5);
-		Segment2D offsetNegative = segment.Offset(-2.5);
+		//Segment2D offsetPositive = segment.Offset(2.5);
+		//Segment2D offsetNegative = segment.Offset(-2.5);
 
-		renderer.DrawSegment(offsetPositive, 1.0f, 1.0f, 0.0f, 0.0f);
-		renderer.DrawSegment(offsetNegative, 1.0f, 0.0f, 0.0f, 1.0f);
+		//renderer.DrawSegment(offsetPositive, 1.0f, 1.0f, 0.0f, 0.0f);
+		//renderer.DrawSegment(offsetNegative, 1.0f, 0.0f, 0.0f, 1.0f);
 
+		// Offset 2
+		Segment2D offset1_pos = segment1.Offset(0.5);
+		Segment2D offset2_pos = segment2.Offset(0.5);
+		Segment2D offset3_pos = segment3.Offset(0.5);
+		Segment2D offset4_pos = segment4.Offset(0.5);
+
+		Segment2D offset1_neg = segment1.Offset(-0.5);
+		Segment2D offset2_neg = segment2.Offset(-0.5);
+		Segment2D offset3_neg = segment3.Offset(-0.5);
+		Segment2D offset4_neg = segment4.Offset(-0.5);
+
+		renderer.DrawSegment(segment1, 1.5f, 1.0f, 1.0f, 1.0f);
+		renderer.DrawSegment(segment2, 1.5f, 1.0f, 1.0f, 1.0f);
+		renderer.DrawSegment(segment3, 1.5f, 1.0f, 1.0f, 1.0f);
+		renderer.DrawSegment(segment4, 1.5f, 1.0f, 1.0f, 1.0f);
+
+		renderer.DrawSegment(offset1_pos, 1.0f, 1.0f, 0.0f, 0.0f);
+		renderer.DrawSegment(offset2_pos, 1.0f, 1.0f, 0.0f, 0.0f);
+		renderer.DrawSegment(offset3_pos, 1.0f, 1.0f, 0.0f, 0.0f);
+		renderer.DrawSegment(offset4_pos, 1.0f, 1.0f, 0.0f, 0.0f);
+
+		renderer.DrawSegment(offset1_neg, 1.0f, 0.0f, 0.0f, 1.0f);
+		renderer.DrawSegment(offset2_neg, 1.0f, 0.0f, 0.0f, 1.0f);
+		renderer.DrawSegment(offset3_neg, 1.0f, 0.0f, 0.0f, 1.0f);
+		renderer.DrawSegment(offset4_neg, 1.0f, 0.0f, 0.0f, 1.0f);
 
 
 		glfwSwapBuffers(window);
