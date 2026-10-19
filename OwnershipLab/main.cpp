@@ -24,12 +24,26 @@ void MovePoint_Reference(Point2D& point)
 
 void MovePoint_Pointer(Point2D* point)
 {
-    point->X += 10;
-    point->Y += 10;
+    if (point == nullptr)
+    {
+        std::cout << "No point!" << std::endl;
+        return;
+    }
 
     std::cout << "Inside fuction (Pointer): "
         << point->X << ", "
         << point->Y << std::endl;
+
+    std::cout << "Pointer: "
+        << point
+        << std::endl;
+
+    std::cout << "Actual point address: "
+        << &(*point)
+        << std::endl;
+
+    point->X += 10;
+    point->Y += 10;
 }
 
 
@@ -46,6 +60,9 @@ int main()
     //MovePoint_Reference(point);
 
     MovePoint_Pointer(&point);
+    std::cout << "Address in main: "
+        << &point
+        << std::endl;
 
 
     std::cout << "After: "
