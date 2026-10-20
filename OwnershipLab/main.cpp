@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Point2D.h"
+#include "Polygon.h"
 
 // the value will be copied and the calculated value will be discarded in the end of the fuction
 void MovePoint_Value(Point2D point)
@@ -48,14 +49,34 @@ void MovePoint_Pointer(Point2D* point)
 
 double DistanceFromOrigin(const Point2D& point)  // not copy the original point, but read it
 {
-    point.X = 100;  // it cannot be modified because it is being accessed through a "const" object
+    //point.X = 100;  // it cannot be modified because it is being accessed through a "const" object
 
     return std::sqrt((point.X * point.X) + (point.Y * point.Y));
 }
 
 
+
+
 int main()
 {
+    // Polygon
+    std::vector<Point2D> vertices =
+    {
+        {0,0},
+        {10,0},
+        {10,5},
+        {0,5}
+    };
+
+    Polygon polygon("Subject Polygon", vertices);
+
+    std::cout << polygon.GetName() << std::endl;
+    std::cout << polygon.CalculateArea() << std::endl;
+
+
+    std::cout << "" << std::endl;
+
+    // Point
     Point2D point{ 5,10 };
 
     double distance = DistanceFromOrigin(point);
