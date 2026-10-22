@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Point2D.h"
 #include "Polygon.h"
+#include <memory>
 
 // the value will be copied and the calculated value will be discarded in the end of the fuction
 void MovePoint_Value(Point2D point)
@@ -59,6 +60,16 @@ double DistanceFromOrigin(const Point2D& point)  // not copy the original point,
 
 int main()
 {
+    // smart pointers
+    Point2D pt{ 10,20 };
+
+    Point2D* ptr = &pt;
+
+    std::cout << pt.X << std::endl;
+    std::cout << (*ptr).X << std::endl;
+    std::cout << ptr->X << std::endl;
+
+    std::cout << "" << std::endl;
     // Polygon
     std::vector<Point2D> vertices =
     {
@@ -68,10 +79,21 @@ int main()
         {0,5}
     };
 
+    std::unique_ptr<Polygon> polygonPtr = std::make_unique<Polygon>("Unique Polygon", vertices);
+
+
     Polygon polygon("Subject Polygon", vertices);
 
     std::cout << polygon.GetName() << std::endl;
     std::cout << polygon.CalculateArea() << std::endl;
+
+    Point2D offset{ 5,10 };
+    polygon.TranslatePolygon(offset);
+
+    for (const Point2D& vertex : polygon.GetVertices())
+    {
+        std::cout << "(" << vertex.X << ", " << vertex.Y << ")" << std::endl;
+    }
 
 
     std::cout << "" << std::endl;

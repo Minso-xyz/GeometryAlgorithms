@@ -41,9 +41,9 @@ double Polygon::CalculateArea() const
 	return std::abs(area) * 0.5;
 }
 
-void Polygon::TranslatePolygon(Polygon & polygon, const Point2D & offset)
+void Polygon::TranslatePolygon(const Point2D& offset)
 {
-	for (Point2D& vertex : polygon.GetVertices())
+	for (Point2D& vertex : Vertices)
 	{
 		vertex.X += offset.X;
 		vertex.Y += offset.Y;

@@ -127,10 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GeometryScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Polygon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GeometryScene.h" />
     <ClInclude Include="Point2D.h" />
     <ClInclude Include="Polygon.h" />
   </ItemGroup>
