@@ -18,5 +18,5 @@ public:
 	std::vector<Point2D>& GetVertices();
 
 	double CalculateArea() const;
-	void TranslatePolygon(Polygon& polygon, const Point2D& offset);
+	void TranslatePolygon(const Point2D& offset);
 };
