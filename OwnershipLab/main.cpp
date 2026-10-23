@@ -2,6 +2,9 @@
 #include "Point2D.h"
 #include "Polygon.h"
 #include <memory>
+#include "GeometryScene.h"
+#include "Line.h"
+#include "Circle.h"
 
 // the value will be copied and the calculated value will be discarded in the end of the fuction
 void MovePoint_Value(Point2D point)
@@ -60,17 +63,16 @@ double DistanceFromOrigin(const Point2D& point)  // not copy the original point,
 
 int main()
 {
-    // smart pointers
-    Point2D pt{ 10,20 };
+    // Geometry
+    Point2D start{ 0,0 };
+    Point2D end{ 10,10 };
 
-    Point2D* ptr = &pt;
+    Line line(start, end);
 
-    std::cout << pt.X << std::endl;
-    std::cout << (*ptr).X << std::endl;
-    std::cout << ptr->X << std::endl;
+    Point2D center{ 5,5 };
 
-    std::cout << "" << std::endl;
-    // Polygon
+    Circle circle(center, 10.0);
+
     std::vector<Point2D> vertices =
     {
         {0,0},
@@ -79,8 +81,40 @@ int main()
         {0,5}
     };
 
-    std::unique_ptr<Polygon> polygonPtr = std::make_unique<Polygon>("Unique Polygon", vertices);
+    Polygon polygon("Polygon", vertices);
 
+    std::cout << line.GetType() << std::endl;
+    std::cout << circle.GetType() << std::endl;
+    std::cout << "" << std::endl;
+
+    Geometry* geometry1 = &line;
+    std::cout << geometry1->GetType() << std::endl;
+
+    Geometry* geometry2 = &circle;
+    std::cout << geometry2->GetType() << std::endl;
+
+    Geometry* geometry3 = &polygon;
+    std::cout << geometry3->GetType() << std::endl;
+
+    // smart pointers
+    Point2D pt{ 10,20 };
+
+    Point2D* ptr = &pt;
+
+    std::cout << pt.X << std::endl;
+    std::cout << (*ptr).X << std::endl;
+    std::cout << ptr->X << std::endl;
+    std::cout << "" << std::endl;
+
+    // Polygon
+    GeometryScene scene;
+
+    auto polygonPt = std::make_unique<Polygon>("Polygon A", vertices);
+
+    scene.AddPolygon(std::move(polygonPt));
+
+
+    /*std::unique_ptr<Polygon> polygonPtr = std::make_unique<Polygon>("Unique Polygon", vertices);
 
     Polygon polygon("Subject Polygon", vertices);
 
@@ -93,7 +127,7 @@ int main()
     for (const Point2D& vertex : polygon.GetVertices())
     {
         std::cout << "(" << vertex.X << ", " << vertex.Y << ")" << std::endl;
-    }
+    }*/
 
 
     std::cout << "" << std::endl;

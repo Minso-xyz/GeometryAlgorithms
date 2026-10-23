@@ -3,8 +3,9 @@
 #include <string>
 #include <vector>
 #include "Point2D.h"
+#include "Geometry.h"
 
-class Polygon
+class Polygon : public Geometry
 {
 private:
 	std::string Name;
@@ -12,6 +13,11 @@ private:
 
 public:
 	Polygon(const std::string& name, const std::vector<Point2D>& vertices);
+
+	std::string GetType() const override
+	{
+		return "Polygon";
+	}
 
 	const std::string& GetName() const;
 	const std::vector<Point2D>& GetVertices() const;

@@ -132,7 +132,10 @@
     <ClCompile Include="Polygon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Circle.h" />
+    <ClInclude Include="Geometry.h" />
     <ClInclude Include="GeometryScene.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="Point2D.h" />
     <ClInclude Include="Polygon.h" />
   </ItemGroup>
