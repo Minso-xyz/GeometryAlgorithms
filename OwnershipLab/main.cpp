@@ -87,14 +87,14 @@ int main()
     std::cout << circle.GetType() << std::endl;
     std::cout << "" << std::endl;
 
-    Geometry* geometry1 = &line;
-    std::cout << geometry1->GetType() << std::endl;
+    Geometry* geometry = &line;
+    std::cout << geometry->GetType() << std::endl;
 
-    Geometry* geometry2 = &circle;
-    std::cout << geometry2->GetType() << std::endl;
+    geometry = &circle;
+    std::cout << geometry->GetType() << std::endl;
 
-    Geometry* geometry3 = &polygon;
-    std::cout << geometry3->GetType() << std::endl;
+    geometry = &polygon;
+    std::cout << geometry->GetType() << std::endl;
 
     // smart pointers
     Point2D pt{ 10,20 };
