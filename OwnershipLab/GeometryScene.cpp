@@ -1,7 +1,11 @@
 #include "GeometryScene.h"
 
-void GeometryScene::AddPolygon(std::unique_ptr<Polygon> polygon)
+void GeometryScene::AddGeometry(std::unique_ptr<Geometry> geometry)
 {
-	//Polygons.push_back(std::move(polygon));
-	Polygons.push_back(std::move(polygon));
+	Geometries.push_back(std::move(geometry));
+}
+
+const std::vector<std::unique_ptr<Geometry>>& GeometryScene::GetGeometries() const
+{
+	return Geometries;
 }

@@ -95,6 +95,17 @@ int main()
 
     geometry = &polygon;
     std::cout << geometry->GetType() << std::endl;
+    std::cout << "" << std::endl;
+
+    std::vector<Geometry*> geometries;
+    geometries.push_back(&line);
+    geometries.push_back(&circle);
+    geometries.push_back(&polygon);
+
+    for (Geometry* geometry : geometries)
+    {
+        std::cout << geometry->GetType() << std::endl;
+    }
 
     // smart pointers
     Point2D pt{ 10,20 };
