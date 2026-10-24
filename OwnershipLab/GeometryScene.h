@@ -7,8 +7,9 @@
 class GeometryScene
 {
 private:
-	std::vector<std::unique_ptr<Polygon>> Polygons;
+	std::vector<std::unique_ptr<Geometry>> Geometries;
 
 public:
-	void AddPolygon(std::unique_ptr<Polygon> polygon);
+	void AddGeometry(std::unique_ptr<Geometry> geometry);
+	const std::vector<std::unique_ptr<Geometry>>& GetGeometries() const;
 };

@@ -4,6 +4,6 @@
 class Geometry
 {
 public:
-	virtual std::string GetType() const = 0;
+	virtual std::string GetType() const = 0;   // pure virtual function
 	virtual ~Geometry() = default;
 };
