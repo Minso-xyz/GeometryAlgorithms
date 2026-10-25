@@ -5,6 +5,7 @@
 #include "GeometryScene.h"
 #include "Line.h"
 #include "Circle.h"
+#include <sstream>
 
 // the value will be copied and the calculated value will be discarded in the end of the fuction
 void MovePoint_Value(Point2D point)
@@ -58,11 +59,62 @@ double DistanceFromOrigin(const Point2D& point)  // not copy the original point,
     return std::sqrt((point.X * point.X) + (point.Y * point.Y));
 }
 
+std::unique_ptr<Line> ParseLine(const std::string& lineToParse)
+{
+    std::stringstream ss(lineToParse);   //lineToParse;   // 0 0 10 10 (Line)
+
+    double startX;
+    double startY;
+    double endX;
+    double endY;
+
+    ss >> startX >> startY >> endX >> endY;
+
+    Point2D start { startX, startY };
+    Point2D end{ endX, endY };
+
+    std::unique_ptr<Line> line = std::make_unique<Line>(start, end);
+
+    return line;
+}
+
+std::unique_ptr<Circle> ParseCircle(const std::string& circleToParse)
+{
+    std::stringstream ss(circleToParse);
+
+    double centerX;
+    double centerY;
+    double radius;
+
+    ss >> centerX >> centerY >> radius;
+
+    Point2D center{ centerX, centerY };
+
+    std::unique_ptr<Circle> circle = std::make_unique<Circle>(center, radius);
+
+    return circle;
+}
 
 
 
 int main()
 {
+    // Parsing test
+    std::unique_ptr<Line> parsedLine = ParseLine("0 0 10 10");
+    GeometryScene scene2;
+    scene2.AddGeometry(std::move(parsedLine));
+    //std::cout << parsedLine->GetType() << std::endl;
+
+    if (parsedLine == nullptr)
+    {
+        std::cout << "Ownership moved to GeometryScene!" << std::endl;
+    }
+
+    scene2.PrintGeometries();
+
+    std::cout << "" << std::endl;
+
+
     // Geometry
     Point2D start{ 0,0 };
     Point2D end{ 10,10 };
@@ -83,13 +135,14 @@ int main()
 
     Polygon polygon("Polygon", vertices);
 
-    std::cout << line.GetType() << std::endl;
+   // std::cout << line->GetType() << std::endl;
     std::cout << circle.GetType() << std::endl;
     std::cout << "" << std::endl;
 
-    Geometry* geometry = &line;
-    std::cout << geometry->GetType() << std::endl;
+    /*Geometry* geometry = &line;
+    std::cout << geometry->GetType() << std::endl;*/
 
+    Geometry* geometry;
     geometry = &circle;
     std::cout << geometry->GetType() << std::endl;
 
@@ -98,7 +151,7 @@ int main()
     std::cout << "" << std::endl;
 
     std::vector<Geometry*> geometries;
-    geometries.push_back(&line);
+    //geometries.push_back(&line);
     geometries.push_back(&circle);
     geometries.push_back(&polygon);
 
@@ -122,7 +175,7 @@ int main()
 
     auto polygonPt = std::make_unique<Polygon>("Polygon A", vertices);
 
-    scene.AddPolygon(std::move(polygonPt));
+    scene.AddGeometry(std::move(polygonPt));
 
 
     /*std::unique_ptr<Polygon> polygonPtr = std::make_unique<Polygon>("Unique Polygon", vertices);
