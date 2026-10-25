@@ -12,4 +12,5 @@ private:
 public:
 	void AddGeometry(std::unique_ptr<Geometry> geometry);
 	const std::vector<std::unique_ptr<Geometry>>& GetGeometries() const;
+	void PrintGeometries() const;
 };
