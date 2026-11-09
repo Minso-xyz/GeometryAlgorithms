@@ -7,7 +7,7 @@
 #include "Circle.h"
 #include <sstream>
 
-// the value will be copied and the calculated value will be discarded in the end of the fuction
+// the value will be copied and the calculated value will be discarded in the end of the function
 void MovePoint_Value(Point2D point)
 {
     point.X += 10;
