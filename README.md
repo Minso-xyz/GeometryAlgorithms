@@ -60,6 +60,13 @@ Blue and magenta: input polygons / White: Clipped Polygon / Green: Intersection 
 |------------|------------|------------|------------|
 | ![GeometryAlgorithms](Boolean_Union.png) |  ![GeometryAlgorithms](ClippingPolygons.png) | ![GeometryAlgorithms](Boolean_Subtraction_A-B.png) | ![GeometryAlgorithms](Boolean_Subtraction_B-A.png) |
 
+
+## Offset
+ ![GeometryAlgorithms](Offset_Basic.png)
+
+White : Polygon / Blue : Positive offset / Red : Negative offset
+
+
  
 ## Roadmap
 ### Computational Geometry
