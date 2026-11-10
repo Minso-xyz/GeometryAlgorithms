@@ -4,6 +4,8 @@
 #include "Segment2D.h"
 #include "Polygon.h"
 
+std::vector<Point2D> CalculateOffsetIntersections(const std::vector<Segment2D>& offsetSegments);
+
 class Polygon
 {
 public:

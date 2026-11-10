@@ -440,3 +440,27 @@ std::vector<Polygon> Polygon::BuildPolygonFromSegments(const std::vector<Segment
 	}
 	return result;
 }
+
+std::vector<Point2D> CalculateOffsetIntersections(const std::vector<Segment2D>& offsetSegments)
+{
+	std::vector<Point2D> intersections;
+
+	if (offsetSegments.size() < 2)
+	{
+		return intersections;
+	}
+
+	for (size_t i = 0; i < offsetSegments.size(); ++i)
+	{
+		size_t next = (i + 1) % offsetSegments.size();
+
+		std::optional<Point2D> intersection =
+			offsetSegments[i].LineIntersectionPoint(offsetSegments[next]);
+
+		if (intersection.has_value())
+		{
+			intersections.push_back(intersection.value());
+		}
+	}
+	return intersections;
+}
