@@ -224,42 +224,51 @@ int main()
 		//}
 		
 
-		//// Offset
-		//Segment2D segment = Segment2D(Point2D(-6,-3), Point2D(6,3));
-		//renderer.DrawSegment(segment, 3.0f, 1.0f, 1.0f, 1.0f);   // Draw segment
+		// offset
+		std::vector<Segment2D> offsetSegmentsPos = {
+			segment1.Offset(0.5),
+			segment2.Offset(0.5),
+			segment3.Offset(0.5),
+			segment4.Offset(0.5)
+		};
 
-		//Segment2D offsetPositive = segment.Offset(2.5);
-		//Segment2D offsetNegative = segment.Offset(-2.5);
+		std::vector<Segment2D> offsetSegmentsNeg = {
+			segment1.Offset(-0.5),
+			segment2.Offset(-0.5),
+			segment3.Offset(-0.5),
+			segment4.Offset(-0.5)
+		};
 
-		//renderer.DrawSegment(offsetPositive, 1.0f, 1.0f, 0.0f, 0.0f);
-		//renderer.DrawSegment(offsetNegative, 1.0f, 0.0f, 0.0f, 1.0f);
+		std::vector<Point2D> intersectionsPos = CalculateOffsetIntersections(offsetSegmentsPos);
+		std::vector<Point2D> intersectionNeg = CalculateOffsetIntersections(offsetSegmentsNeg);
+		
+		// draw the intersections of the offset
+		for (const Point2D& p : intersectionsPos)
+		{
+			Point3D p3D(p.X, p.Y, 0);
 
-		// Offset 2
-		Segment2D offset1_pos = segment1.Offset(0.5);
-		Segment2D offset2_pos = segment2.Offset(0.5);
-		Segment2D offset3_pos = segment3.Offset(0.5);
-		Segment2D offset4_pos = segment4.Offset(0.5);
+			renderer.DrawPoint(p3D, 3.0, 1.0, 1.0, 1.0);
+		}
 
-		Segment2D offset1_neg = segment1.Offset(-0.5);
-		Segment2D offset2_neg = segment2.Offset(-0.5);
-		Segment2D offset3_neg = segment3.Offset(-0.5);
-		Segment2D offset4_neg = segment4.Offset(-0.5);
+		for (const Point2D& p : intersectionNeg)
+		{
+			Point3D p3D(p.X, p.Y, 0);
+
+			renderer.DrawPoint(p3D, 3.0, 1.0, 1.0, 1.0);
+		}
 
 		renderer.DrawSegment(segment1, 1.5f, 1.0f, 1.0f, 1.0f);
 		renderer.DrawSegment(segment2, 1.5f, 1.0f, 1.0f, 1.0f);
 		renderer.DrawSegment(segment3, 1.5f, 1.0f, 1.0f, 1.0f);
 		renderer.DrawSegment(segment4, 1.5f, 1.0f, 1.0f, 1.0f);
 
-		renderer.DrawSegment(offset1_pos, 1.0f, 1.0f, 0.0f, 0.0f);
-		renderer.DrawSegment(offset2_pos, 1.0f, 1.0f, 0.0f, 0.0f);
-		renderer.DrawSegment(offset3_pos, 1.0f, 1.0f, 0.0f, 0.0f);
-		renderer.DrawSegment(offset4_pos, 1.0f, 1.0f, 0.0f, 0.0f);
-
-		renderer.DrawSegment(offset1_neg, 1.0f, 0.0f, 0.0f, 1.0f);
-		renderer.DrawSegment(offset2_neg, 1.0f, 0.0f, 0.0f, 1.0f);
-		renderer.DrawSegment(offset3_neg, 1.0f, 0.0f, 0.0f, 1.0f);
-		renderer.DrawSegment(offset4_neg, 1.0f, 0.0f, 0.0f, 1.0f);
-
+		// draw the offset
+		Polygon polygonPos;
+		Polygon polygonNeg;
+		polygonPos.Vertices = intersectionsPos;
+		polygonNeg.Vertices = intersectionNeg;
+		renderer.DrawPolygon(polygonPos, 1.0f, 1.0f, 0.0f, 0.0f);
+		renderer.DrawPolygon(polygonNeg, 1.0f, 0.0f, 0.0f, 1.0f);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();   // handle the mouse/keyboard inputs
