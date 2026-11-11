@@ -77,7 +77,7 @@ White : Polygon / Blue : Positive offset / Red : Negative offset
 - [x] Line Segment Intersection Point Calculation
 - [x] Convex Polygon Clipping (Sutherland-Hodgman)
 - [x] Polygon Boolean Operations
-- [ ] Polygon Offset
+- [x] Polygon Offset
 - [ ] Polygon Triangulation
 - [ ] SVG Export
  
