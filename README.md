@@ -62,7 +62,7 @@ Blue and magenta: input polygons / White: Clipped Polygon / Green: Intersection 
 
 
 ## Offset
- ![GeometryAlgorithms](Offset_Basic.png)
+ ![GeometryAlgorithms](Offset.png)
 
 White : Polygon / Blue : Positive offset / Red : Negative offset
 
