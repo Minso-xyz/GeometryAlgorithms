@@ -39,6 +39,9 @@
     <ClCompile Include="Segment2D.cpp">
       <Filter>ComputationalGeometry</Filter>
     </ClCompile>
+    <ClCompile Include="Triangle2D.cpp">
+      <Filter>ComputationalGeometry</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
