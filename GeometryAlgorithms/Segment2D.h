@@ -2,6 +2,7 @@
 #include "Point2D.h"
 #include "Vector2D.h"
 #include <stdexcept>
+#include <optional>
 
 class Segment2D
 {
@@ -23,5 +24,7 @@ public:
 	bool Intersects(const Segment2D& other) const;
 	bool IsPointOnSegment(const Point2D& point) const;
 	Point2D IntersectionPoint(const Segment2D& other);
+	std::optional<Point2D> LineIntersectionPoint(const Segment2D& other) const;
 	Segment2D Offset(double distance) const;
+
 };

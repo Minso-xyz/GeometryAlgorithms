@@ -60,6 +60,13 @@ Blue and magenta: input polygons / White: Clipped Polygon / Green: Intersection 
 |------------|------------|------------|------------|
 | ![GeometryAlgorithms](Boolean_Union.png) |  ![GeometryAlgorithms](ClippingPolygons.png) | ![GeometryAlgorithms](Boolean_Subtraction_A-B.png) | ![GeometryAlgorithms](Boolean_Subtraction_B-A.png) |
 
+
+## Offset
+ ![GeometryAlgorithms](Offset.png)
+
+White : Polygon / Blue : Positive offset / Red : Negative offset
+
+
  
 ## Roadmap
 ### Computational Geometry
@@ -70,7 +77,7 @@ Blue and magenta: input polygons / White: Clipped Polygon / Green: Intersection 
 - [x] Line Segment Intersection Point Calculation
 - [x] Convex Polygon Clipping (Sutherland-Hodgman)
 - [x] Polygon Boolean Operations
-- [ ] Polygon Offset
+- [x] Polygon Offset
 - [ ] Polygon Triangulation
 - [ ] SVG Export
  

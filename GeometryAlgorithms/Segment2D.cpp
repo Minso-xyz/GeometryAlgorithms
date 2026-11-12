@@ -88,6 +88,34 @@ Point2D Segment2D::IntersectionPoint(const Segment2D& other)
 	return p;
 }
 
+std::optional<Point2D> Segment2D::LineIntersectionPoint(const Segment2D& other) const
+{
+	// Points of the segments
+	Point2D a = Start;
+	Point2D b = End;
+	Point2D c = other.Start;
+	Point2D d = other.End;
+
+	Vector2D ab = a.VectorTo(b);
+	Vector2D cd = c.VectorTo(d);
+	Vector2D ac = a.VectorTo(c);
+
+	double denominator = ab.Cross(cd);
+
+	if (std::abs(denominator) < 1e-9)  // tolerance
+	{
+		return std::nullopt;
+		throw std::runtime_error("No intersection point exists.");   // Segment AB and CD are in parallel
+	}
+
+	double t = ac.Cross(cd) / ab.Cross(cd);
+
+	// P = A + t (B - A)
+	Point2D p = a + (ab * t);
+
+	return p;
+}
+
 Segment2D Segment2D::Offset(double distance) const
 {
 	Vector2D direction = Vector2D(End.X - Start.X, End.Y - Start.Y);
